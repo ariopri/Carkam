@@ -12,13 +12,14 @@
     "paths": {
         "/categories" : {
             "get" : {
+                "tags" : ["Category API"],
                 "description": "List Catagories",
                 "responses" : {
                     "200" : {
                         "description": "Success get catagories",
                         "content" : {
                             "application/json": {
-                                "schema" : {
+                                "schemas" : {
                                     "type" : "object",
                                     "properties" : {
                                         "code" : {
@@ -43,6 +44,43 @@
                                                     }
                                                 }
                                             }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags" : ["Category API"],
+                "requestBody": {
+                    "content" : {
+                        "application/json" :{
+                            "schema" :{
+                                "type" : "object",
+                                "properties" : {
+                                    "name" : {
+                                        "type" : "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "response": {
+                    "200" :{
+                        "description" : "Success create catagories",
+                        "content": {
+                            "application/json" : {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type" : "number"
+                                        },
+                                        "name" : {
+                                            "type" :"string"
                                         }
                                     }
                                 }
