@@ -1,7 +1,7 @@
 package ui
 
 import (
-	"github.com/rg-km/final-project-engineering-66/backend/repository"
+	"github.com/ariopri/rg-km/final-project-engineering-66/backend/repository"
 	"github.com/rivo/tview"
 )
 
