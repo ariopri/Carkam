@@ -1,0 +1,2 @@
+Loggedin bool
+Token    string
