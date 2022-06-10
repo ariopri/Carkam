@@ -1,11 +1,11 @@
 import SlideShow from "./BerandaItem/SlideShow";
-import Pencarian from "./BerandaItem/Pencarian";
+import Testimoni from "./BerandaItem/Testimoni";
 const Beranda = () => {
-    return (
-        <>
-        <SlideShow />
-        <Pencarian/>
-        </>
-    );
-    }
+  return (
+    <>
+      <SlideShow />
+      <Testimoni />
+    </>
+  );
+};
 export default Beranda;
