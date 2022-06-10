@@ -1,0 +1,30 @@
+.sibaground {
+  background-image: linear-gradient(#ccffcc, white);
+}
+.sisapcesubjudul {
+  padding-top: 5%;
+}
+.sitext {
+  color: #506557;
+}
+.siplaceholder {
+  text-align: center;
+}
+
+/* testimoni */
+.sibagtesti {
+}
+
+.kasihjarak {
+  padding: 5%;
+}
+
+.backlagi {
+  border-radius: 100px;
+  background-color: #e4f1df;
+}
+
+/* berita */
+.spaciberita {
+  padding-top: 5%;
+}
