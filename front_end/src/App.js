@@ -1,10 +1,11 @@
-import "./App.css";
-import NavigationBar from "./components/NavigationBar";
-import "./style/SlideShow.css";
-import Beranda from "./components/Beranda";
-import Footer from "./components/Footer";
-import TentangKami from "./components/TentangKami";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import './App.css';
+import NavigationBar from './components/NavigationBar';
+import './style/SlideShow.css';
+import Beranda from './components/Beranda';
+import Footer from './components/Footer';
+import TentangKami from './components/TentangKami';
+import Login from './components/Login';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
   return (
     <>
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Beranda />} />
           <Route path="/Tentangkami" element={<TentangKami />} />
+          <Route path="/Login" element={<Login />} />
         </Routes>
       </Router>
       <Footer />
