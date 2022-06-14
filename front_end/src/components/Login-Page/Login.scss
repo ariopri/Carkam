@@ -16,6 +16,10 @@ $main-color: #4dd6b6;
     display: flex;
     justify-content: center;
     align-items: center;
+    .link {
+      text-decoration: none;
+      color: $main-color;
+    }
 
     .left-side,
     .right-side {
@@ -29,6 +33,18 @@ $main-color: #4dd6b6;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      .img-class {
+        margin-bottom: 1rem;
+        height: 4.5rem;
+        #img-id {
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .footer {
+        margin-top: 45px;
+      }
 
       input {
         display: block;
@@ -71,6 +87,26 @@ $main-color: #4dd6b6;
         &:hover {
           box-shadow: 4px 3px 9px -1px gray;
           transform: translateY(-5px);
+        }
+      }
+    }
+    .right-side {
+      .welcomeNote {
+        h5 {
+          margin-left: 1rem;
+          color: white;
+          font-weight: bold;
+          float: left;
+          margin-bottom: 2rem;
+        }
+      }
+      .welcomeImg {
+        height: 50%;
+        width: 70%;
+        margin: 0rem auto;
+        #wel-img-id {
+          width: 100%;
+          object-fit: cover;
         }
       }
     }
