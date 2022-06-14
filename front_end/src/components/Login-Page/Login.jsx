@@ -54,7 +54,7 @@ function Login() {
               </div>
               <div className="right-side">
                 <div className="welcomeNote">
-                  <h5>Welcome Back !</h5>
+                  <h3>Welcome Back !</h3>
                 </div>
                 <div className="welcomeImg">
                   <img src={welcomeImg} id="wel-img-id" alt="" srcSet="" />
