@@ -9,8 +9,9 @@ import Register from './components/Register-Page/Register';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <>
+    {/* <div className="App">
+    <header className="App-header"> */}
         <NavigationBar />
         <Router>
           <Routes>
@@ -21,8 +22,9 @@ function App() {
           </Routes>
         </Router>
         <Footer />
-      </header>
-    </div>
+    {/* </header>
+    </div> */}
+    </>
   );
 }
 
