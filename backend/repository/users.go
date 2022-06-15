@@ -1,126 +1,78 @@
 package repository
 
 import (
+	"database/sql"
 	"errors"
-	"strconv"
-
-	"github.com/github.com/rg-km/final-project-engineering-66/db"
 )
 
 type UserRepository struct {
-	db db.DB
+	db *sql.DB
 }
 
-const userDbName = "users"
-
-var userColumns = []string{"username", "password", "loggedin", "role"}
-
-func NewUserRepository(db db.DB) UserRepository {
-	return UserRepository{db}
+func NewUserRepository(db *sql.DB) *UserRepository {
+	return &UserRepository{db: db}
 }
 
-func (u *UserRepository) LoadOrCreate() ([]User, error) {
-	records, err := u.db.Load(userDbName)
+func (u *UserRepository) FetchUserByID(id int64) (User, error) {
+
+	var user User
+	err := u.db.QueryRow("SELECT * FROM users WHERE id = ?", id).Scan(&user.ID, &user.Username, &user.Password, &user.Password, &user.Role, &user.Loggedin, &user.Token)
 	if err != nil {
-		records = [][]string{userColumns}
-		if err := u.db.Save(userDbName, records); err != nil {
-			return nil, err
-		}
+		return user, err
 	}
+	return user, nil
 
-	result := make([]User, 0)
-	for i := 1; i < len(records); i++ {
-		loggedin, err := strconv.ParseBool(records[i][2])
+}
+
+func (u *UserRepository) FetchUsers() ([]User, error) {
+
+	rows, err := u.db.Query("SELECT * FROM users")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var users []User
+	for rows.Next() {
+		var user User
+		err := rows.Scan(&user.ID, &user.Username, &user.Password, &user.Role, &user.Loggedin)
 		if err != nil {
 			return nil, err
 		}
-
-		user := User{
-			Username: records[i][0],
-			Password: records[i][1],
-			Role:     records[i][3],
-			Loggedin: loggedin,
-		}
-		result = append(result, user)
+		users = append(users, user)
 	}
+	return users, nil
 
-	return result, nil
 }
 
-func (u *UserRepository) SelectAll() ([]User, error) {
-	return u.LoadOrCreate()
-}
+func (u *UserRepository) Login(username string, password string) (*string, error) {
 
-func (u UserRepository) Login(username string, password string) (*string, error) {
-	var loggedInUser *string
-
-	users, err := u.LoadOrCreate()
+	var user User
+	err := u.db.QueryRow("SELECT username FROM users WHERE username = ? AND password = ?", username, password).Scan(&user.Username)
 	if err != nil {
-		return loggedInUser, err
+		return nil, errors.New("Login Failed")
 	}
+	return &user.Username, nil
 
-	_, user := searchUserByUsername(users, username)
-	if user == nil || user.Password != password {
-		return loggedInUser, errors.New("Login Failed")
-	}
-
-	err = u.changeStatus(users, username, true, "Login Failed")
-	if err != nil {
-		return loggedInUser, err
-	}
-
-	loggedInUser = &username
-	return loggedInUser, nil
 }
 
-func (u *UserRepository) Save(users []User) error {
-	records := [][]string{userColumns}
-	for i := 0; i < len(users); i++ {
-		records = append(records, []string{
-			users[i].Username,
-			users[i].Password,
-			strconv.FormatBool(users[i].Loggedin),
-			users[i].Role,
-		})
+func (u *UserRepository) InsertUser(username string, password string, role string, loggedin bool) error {
+
+	_, err := u.db.Exec("INSERT INTO users (username, password, role) VALUES (?, ?, ?, ?)", username, password, loggedin, role)
+	if err != nil {
+		return err
 	}
-	return u.db.Save(userDbName, records)
+	return nil
+
 }
 
-func (u *UserRepository) GetUserRole(username string) (*string, error) {
-	var role *string
+func (u *UserRepository) FetchUserRole(username string) (*string, error) {
 
-	// load users
-	users, err := u.LoadOrCreate()
+	var user User
+	err := u.db.QueryRow("SELECT role FROM users WHERE username = ?", username).Scan(&user.Role)
 	if err != nil {
-		return role, err
+		return nil, err
 	}
-
-	// search by username
-	_, user := searchUserByUsername(users, username)
-	if user == nil {
-		return role, errors.New("user not found")
-	}
-
 	return &user.Role, nil
-}
 
-func searchUserByUsername(users []User, username string) (int, *User) {
-	for i, user := range users {
-		if user.Username == username {
-			return i, &user
-		}
-	}
-	return -1, nil
-}
-
-func (u *UserRepository) changeStatus(users []User, username string, status bool, errMsg string) error {
-	i, user := searchUserByUsername(users, username)
-	if user == nil {
-		return errors.New(errMsg)
-	}
-
-	user.Loggedin = status
-	users[i] = *user
-
-	return u.Save(users)
 }
