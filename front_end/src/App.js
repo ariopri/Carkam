@@ -8,11 +8,10 @@ import Login from "./components/Login-Page/Login";
 import Register from "./components/Register-Page/Register";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FAQ from "./components/FAQ";
+import Kampus from "./components/Kampus";
 function App() {
   return (
     <>
-      {/* <div className="App">
-    <header className="App-header"> */}
       <NavigationBar />
       <Router>
         <Routes>
@@ -21,11 +20,10 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/FAQ" element={<FAQ />} />
+          <Route path="/Kampus" element={<Kampus />} />
         </Routes>
       </Router>
       <Footer />
-      {/* </header>
-    </div> */}
     </>
   );
 }
