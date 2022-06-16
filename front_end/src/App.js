@@ -9,6 +9,7 @@ import Register from "./components/Register-Page/Register";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FAQ from "./components/FAQ";
 import Kampus from "./components/Kampus";
+import DetailKampus from "./components/DetailKampus";
 function App() {
   return (
     <>
@@ -21,6 +22,7 @@ function App() {
           <Route path="/Register" element={<Register />} />
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="/Kampus" element={<Kampus />} />
+          <Route path="/detailkampus" element={<DetailKampus />} />
         </Routes>
       </Router>
       <Footer />
