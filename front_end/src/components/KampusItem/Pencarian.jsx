@@ -28,6 +28,11 @@ const Pencarian = () => {
                 Cari
               </button>
             </div>
+            <center>
+              <a href="/inpuunivbaru" className="btn btn-warning">
+                <b>Tidak menemukan? Tambah disini</b>
+              </a>
+            </center>
           </div>
           <div class="col-md-6">
             <center>
