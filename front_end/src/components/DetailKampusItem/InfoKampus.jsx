@@ -41,10 +41,6 @@ const InfoKampus = () => {
                         </button>
                       </div>
                     </div>
-                    {/* <footer className="blockquote-footer">
-                      Someone famous in{" "}
-                      <cite title="Source Title">Source Title</cite>
-                    </footer> */}
                   </blockquote>
                 </Card.Body>
               </Card>

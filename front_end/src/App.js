@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FAQ from "./components/FAQ";
 import Kampus from "./components/Kampus";
 import DetailKampus from "./components/DetailKampus";
+import Masukkanreview from "./components/Masukkanreview";
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="/Kampus" element={<Kampus />} />
           <Route path="/detailkampus" element={<DetailKampus />} />
+          <Route path="/review" element={<Masukkanreview />} />
         </Routes>
       </Router>
       <Footer />
