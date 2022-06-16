@@ -11,6 +11,7 @@ import FAQ from "./components/FAQ";
 import Kampus from "./components/Kampus";
 import DetailKampus from "./components/DetailKampus";
 import Masukkanreview from "./components/Masukkanreview";
+import InputUnivBaru from "./components/InputUnivBaru";
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
           <Route path="/Kampus" element={<Kampus />} />
           <Route path="/detailkampus" element={<DetailKampus />} />
           <Route path="/review" element={<Masukkanreview />} />
+          <Route path="/inpuunivbaru" element={<InputUnivBaru />} />
         </Routes>
       </Router>
       <Footer />
