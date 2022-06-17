@@ -12,7 +12,21 @@ const InfoKampus = () => {
             <div class="col-md-6 pt-5">
               <Card>
                 <Card.Header className="bg-success text-light">
-                  <b>Kampus Merdeka</b>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <b>Kampus Merdeka &nbsp;</b>
+                    </div>
+                    <div class="col-md-6">
+                      <div className="d-flex flex-row-reverse mt-">
+                        <a
+                          href="/edituniv"
+                          className="btn btn-danger text-light "
+                        >
+                          <b>Ubah / Hapus</b>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </Card.Header>
                 <Card.Body>
                   <blockquote className="blockquote mb-0">
