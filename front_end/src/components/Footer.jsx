@@ -6,11 +6,7 @@ const Footer = () => {
           <div class="row">
             <div class="col-lg-5 col-xs-12 ">
               <h2>C A R K A M . I D</h2>
-              <p class="pr-5 text-white-50">
-                Jelajahi informasi kampus - kampus di Indonesia berdasarkan
-                lokasi, biaya kuliah, jurusan serta passing grade untuk
-                membantumu memilih kampus terbaik.{" "}
-              </p>
+              <p class="pr-5 text-white-50">Jelajahi informasi kampus - kampus di Indonesia berdasarkan lokasi, biaya kuliah, jurusan serta passing grade untuk membantumu memilih kampus terbaik. </p>
             </div>
             <div class="col-lg-3 col-xs-12 ">
               <h4 class="mt-lg-0 mt-sm-3">Email</h4>
