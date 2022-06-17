@@ -1,10 +1,11 @@
+import logo from "./Login-Page/image/logo-carkam.png";
 const NavigationBar = () => {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-dark">
         <div className="container">
           <a className="navbar-brand  text-light" href="/">
-            <b>C A R K A M . I D</b>
+            <img src={logo} alt="" width="150px" />
           </a>
           <button
             className="navbar-toggler"
@@ -43,7 +44,7 @@ const NavigationBar = () => {
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
                 <a className="nav-link btn btn-warning text-dark" href="/Login">
-                  <b> Hi, Ahmad</b>{" "}
+                  <b> Login</b>
                 </a>
               </li>
             </ul>
