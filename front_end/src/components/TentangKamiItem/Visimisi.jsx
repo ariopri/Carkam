@@ -1,39 +1,27 @@
 const Visimisi = () => {
   return (
     <>
-      <div class="container pt-5">
+      <div class="container pt-5 h-25 w-auto d-flex justify-content-center">
         <div class="row">
           <div class="col-md-6">
             <div class="row">
               <div class="col-md-12">
-                <h3>
+                <h3 class="mb-3">
                   <b>VISI</b>
                 </h3>
-                <h5>
-                  Menjadi edutech yang memberdayakan ekosistem pendidikan untuk
-                  meningkatkan kualitas SDM menuju Indonesia pintar.
-                </h5>
+                <h5>Menjadi edutech yang memberdayakan ekosistem pendidikan untuk meningkatkan kualitas SDM menuju Indonesia pintar.</h5>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12 pt-2">
-                <h3>
+                <h3 class=" mt-2 mb-3">
                   <b>MISI</b>
                 </h3>
                 <ol>
                   <h5>
-                    <li>
-                      Menjadikan CARKAM.ID sebagai pelopor teknologi terdepan
-                      dalam pendidikan.
-                    </li>
-                    <li>
-                      Memberdayakan ekosistem pendidikan di Indonesia dan
-                      mengintegrasikannya di dalam aplikasi CARKAM.ID
-                    </li>
-                    <li>
-                      Turut berkontribusi dalam meningkatkan kualitas SDM dalam
-                      pendidikan sesuai minat dan bakat menuju Indonesia Pintar.
-                    </li>
+                    <li class="mb-2">Menjadikan CARKAM.ID sebagai pelopor teknologi terdepan dalam pendidikan.</li>
+                    <li class="mb-2">Memberdayakan ekosistem pendidikan di Indonesia dan mengintegrasikannya di dalam aplikasi CARKAM.ID</li>
+                    <li class="mb-2">Turut berkontribusi dalam meningkatkan kualitas SDM dalam pendidikan sesuai minat dan bakat menuju Indonesia Pintar.</li>
                   </h5>
                 </ol>
               </div>
