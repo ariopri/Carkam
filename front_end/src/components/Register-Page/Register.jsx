@@ -28,14 +28,37 @@ const Register = () => {
                     </center>
                     <Form className="pt-3">
                       <Form.Group className="mb-3">
-                        <Form.Control type="text" placeholder="User Name" />
+                        <Form.Control type="text" placeholder="Your Name" />
                       </Form.Group>
                       <Form.Group className="mb-3">
-                        <Form.Control type="email" placeholder="Email" />
+                        <Form.Control type="email" placeholder="Your Email" />
                       </Form.Group>
                       <Form.Group className="mb-3">
                         <Form.Control type="password" placeholder="Password" />
                       </Form.Group>
+                      <Form.Group className="mb-3">
+                        <Form.Control type="password" placeholder="Repeat Your Password" />
+                      </Form.Group>
+                      <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                        <h6 class="mb-0 me-4">Gender : </h6>
+                        <div class="form-check form-check-inline mb-0 me-4">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender" value="option1" />
+                          <label class="form-check-label" for="femaleGender">
+                            Female
+                          </label>
+                        </div>
+
+                        <div class="form-check form-check-inline mb-0 me-4">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender" value="option2" />
+                          <label class="form-check-label" for="maleGender">
+                            Male
+                          </label>
+                        </div>
+                      </div>
+                      <input class="form-check-input me-3" type="checkbox" value="" id="form2Example3c" />
+                      <label class="form-check-label pb-4" for="form2Example3">
+                        I agree all statements in Terms of service
+                      </label>
                       <Button variant="dark w-100" type="submit">
                         S U B M I T
                       </Button>

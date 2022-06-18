@@ -8,7 +8,7 @@ const Deskripsi = ({}) => {
           Masyarakat Indonesia
         </h3>
         <br />
-        <h5>
+        <h5 className="d-flex justify-content-center h-25 w-auto">
           CARKAM.ID merupakan website teknologi informasi yang didedikasikan untuk kemajuan Indonesia dengan membantu masyarakat dalam hal pendidikan. Aplikasi CARKAM.ID akan membantu generasi muda Indonesia dalam mendapatkan pendidikan
           yang sesuai dengan minat dan bakat yang dimiliki.
         </h5>

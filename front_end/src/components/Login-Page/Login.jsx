@@ -34,7 +34,7 @@ function Login() {
                   />
                   <label for="pwd1">Password</label>
                   <input
-                    placeholder="Enter password"
+                    placeholder="Enter your password"
                     type="password"
                     value={passval}
                     onChange={(e) => {
