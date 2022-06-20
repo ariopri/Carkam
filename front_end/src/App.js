@@ -25,10 +25,10 @@ function App() {
           <Route path="/Register" element={<Register />} />
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="/Kampus" element={<Kampus />} />
-          <Route path="/detailkampus" element={<DetailKampus />} />
-          <Route path="/review" element={<Masukkanreview />} />
-          <Route path="/inpuunivbaru" element={<InputUnivBaru />} />
-          <Route path="/edituniv" element={<EditUniv />} />
+          <Route path="/Kampus/detail" element={<DetailKampus />} />
+          <Route path="/Kampus/detail/review" element={<Masukkanreview />} />
+          <Route path="/Kampus/create" element={<InputUnivBaru />} />
+          <Route path="/Kampus/detail/update" element={<EditUniv />} />
         </Routes>
       </Router>
       <Footer />

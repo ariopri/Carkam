@@ -27,7 +27,7 @@ const ListKampus = () => {
                 <ListGroup.Item>Terdapat 7 Jurusan</ListGroup.Item>
               </ListGroup>
               <Card.Body>
-                <Card.Link href="/detailkampus" className="btn btn-success">
+                <Card.Link href="/Kampus/detail" className="btn btn-success">
                   Lihat
                 </Card.Link>
               </Card.Body>
@@ -50,7 +50,7 @@ const ListKampus = () => {
                 <ListGroup.Item>Terdapat 7 Jurusan</ListGroup.Item>
               </ListGroup>
               <Card.Body>
-                <Card.Link href="/detailkampus" className="btn btn-success">
+                <Card.Link href="/Kampus/detail" className="btn btn-success">
                   Lihat
                 </Card.Link>
               </Card.Body>
@@ -73,7 +73,7 @@ const ListKampus = () => {
                 <ListGroup.Item>Terdapat 7 Jurusan</ListGroup.Item>
               </ListGroup>
               <Card.Body>
-                <Card.Link href="/detailkampus" className="btn btn-success">
+                <Card.Link href="/Kampus/detail" className="btn btn-success">
                   Lihat
                 </Card.Link>
               </Card.Body>
@@ -96,7 +96,7 @@ const ListKampus = () => {
                 <ListGroup.Item>Terdapat 7 Jurusan</ListGroup.Item>
               </ListGroup>
               <Card.Body>
-                <Card.Link href="/detailkampus" className="btn btn-success">
+                <Card.Link href="/Kampus/detail" className="btn btn-success">
                   Lihat
                 </Card.Link>
               </Card.Body>
@@ -121,7 +121,7 @@ const ListKampus = () => {
                 <ListGroup.Item>Terdapat 7 Jurusan</ListGroup.Item>
               </ListGroup>
               <Card.Body>
-                <Card.Link href="/detailkampus" className="btn btn-success">
+                <Card.Link href="/Kampus/detail" className="btn btn-success">
                   Lihat
                 </Card.Link>
               </Card.Body>
@@ -144,7 +144,7 @@ const ListKampus = () => {
                 <ListGroup.Item>Terdapat 7 Jurusan</ListGroup.Item>
               </ListGroup>
               <Card.Body>
-                <Card.Link href="/detailkampus" className="btn btn-success">
+                <Card.Link href="/Kampus/detail" className="btn btn-success">
                   Lihat
                 </Card.Link>
               </Card.Body>
@@ -167,7 +167,7 @@ const ListKampus = () => {
                 <ListGroup.Item>Terdapat 7 Jurusan</ListGroup.Item>
               </ListGroup>
               <Card.Body>
-                <Card.Link href="/detailkampus" className="btn btn-success">
+                <Card.Link href="/Kampus/detail" className="btn btn-success">
                   Lihat
                 </Card.Link>
               </Card.Body>
@@ -190,7 +190,7 @@ const ListKampus = () => {
                 <ListGroup.Item>Terdapat 7 Jurusan</ListGroup.Item>
               </ListGroup>
               <Card.Body>
-                <Card.Link href="/detailkampus" className="btn btn-success">
+                <Card.Link href="/Kampus/detail" className="btn btn-success">
                   Lihat
                 </Card.Link>
               </Card.Body>
