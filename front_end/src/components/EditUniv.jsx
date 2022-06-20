@@ -4,7 +4,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import gambarasik from "./EditUnivItem/image/Beranda.png";
 
-const EditUniv = () => {
+const EditUniv = (props) => {
+  const dariprops = props.peringatan2();
   return (
     <>
       <Container>

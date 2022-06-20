@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 
 import gambarasik from "./MasukkanreviewItem/image/iniprofil.png";
 const Masukkanreview = (props) => {
+  const dariprops = props.peringatan();
   return (
     <>
       <Container>
