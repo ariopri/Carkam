@@ -19,7 +19,7 @@ const InfoKampus = () => {
                     <div class="col-md-6">
                       <div className="d-flex flex-row-reverse mt-">
                         <a
-                          href="/edituniv"
+                          href="/Kampus/detail/update"
                           className="btn btn-danger text-light "
                         >
                           <b>Ubah / Hapus</b>
@@ -30,29 +30,45 @@ const InfoKampus = () => {
                 </Card.Header>
                 <Card.Body>
                   <blockquote className="blockquote mb-0">
-                    <p>Info singkat kampus</p>
+                    <p>
+                      <b>Info singkat kampus</b>
+                    </p>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Ullam, praesentium nam dignissimos repellendus voluptates
+                      tempore.
+                    </p>
+                    <br />
+                    <p>
+                      <b>Jurusan : </b> Teknik Informatika, Teknik Sipil, Teknik
+                      Mesin.
+                    </p>
+                    <button className="btn btn-success  w-100  ">
+                      <a
+                        href="/Kampus/detail/review"
+                        className="btn text-light"
+                      >
+                        <b>R e v i e w</b>
+                      </a>
+                    </button>
                     <div class="container">
                       <div class="row pt-3">
-                        <div class="col-md-12">Jurusan 1</div>
+                        <div class="col-md-12">Dodi</div>
                         <footer className="blockquote-footer">
-                          Pendapat dan review mahasiswa
+                          Kampusnya bagus gaes
                         </footer>
-                        <button className="btn btn-success  ">
-                          <a href="/review" className="btn text-light">
-                            <b>R e v i e w</b>
-                          </a>
-                        </button>
                       </div>
                       <div class="row pt-3">
-                        <div class="col-md-12">Jurusan 1</div>
+                        <div class="col-md-12">Dodi</div>
                         <footer className="blockquote-footer">
-                          Pendapat dan review mahasiswa
+                          Kampusnya bagus gaes
                         </footer>
-                        <button className="btn btn-success  ">
-                          <a href="/review" className="btn text-light">
-                            <b>R e v i e w</b>
-                          </a>
-                        </button>
+                      </div>
+                      <div class="row pt-3">
+                        <div class="col-md-12">Dodi</div>
+                        <footer className="blockquote-footer">
+                          Kampusnya bagus gaes
+                        </footer>
                       </div>
                     </div>
                   </blockquote>
