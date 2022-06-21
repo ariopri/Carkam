@@ -1,4 +1,4 @@
-import Back1 from "./image/FAQ-Carkam.png";
+import Back1 from './image/FAQ-Carkam.png';
 
 const Jumbo = () => {
   return (
