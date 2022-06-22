@@ -1,4 +1,4 @@
-import Logo from './Login-Page/image/logo-carkam.png';
+import Logo from "./Login-Page/image/logo-carkam.png";
 
 const Footer = () => {
   return (
@@ -9,7 +9,11 @@ const Footer = () => {
             <div class="col-lg-6 col-xs-12 ">
               <center>
                 <img src={Logo} alt="" class="pb-4" />
-                <p class="col-lg-11 text-white-50">Jelajahi informasi kampus - kampus di Indonesia berdasarkan lokasi, biaya kuliah, jurusan serta passing grade untuk membantumu memilih kampus terbaik </p>
+                <p class="col-lg-11 text-white-50">
+                  Jelajahi informasi kampus - kampus di Indonesia berdasarkan
+                  lokasi, biaya kuliah, jurusan serta passing grade untuk
+                  membantumu memilih kampus terbaik{" "}
+                </p>
               </center>
             </div>
             <div class="col-lg-2 col-xs-12 ">
@@ -23,7 +27,9 @@ const Footer = () => {
             <div class="col-lg-2 col-xs-12 ">
               <h4 class="mt-lg-0 mt-sm-4">Location</h4>
               <p class="pr-5 text-white-50"> South Jakarta, Indonesia</p>
-              <p class="pr-5 text-white-50">Grand Slipi Tower Lt. 42 Jl. S. Parman Kav 22-24</p>
+              <p class="pr-5 text-white-50">
+                Grand Slipi Tower Lt. 42 Jl. S. Parman Kav 22-24
+              </p>
               <p class="pr-5 text-white-50"> 8 A.M - 5 P.M</p>
             </div>
           </div>
