@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import { unstable_HistoryRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Logo from "./image/logo.png";
 import Gambaran from "./image/login.png";
 import Button from "react-bootstrap/Button";
@@ -7,27 +7,28 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import { useState } from "react";
 const Register = () => {
-  const history = unstable_HistoryRouter;
-  const baseUrl = "https://my-udemy-api.herokuapp.com/api/v1";
+  const navigate = useNavigate();
+  const baseUrl = "https://reqres.in";
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
   const [pass, setpass] = useState("");
   const [pass2, setpass2] = useState("");
   const register = async () => {
-    console.log("ikibos");
     if (pass === pass2) {
-      const passwordnya = pass;
-      const daftar = {
-        name,
+      const password = pass;
+      const user = {
         email,
-        passwordnya,
+        password,
       };
       try {
-        const resregis = await axios.post(`${baseUrl}/user/signup`, daftar);
-        setname("");
+        const res = await axios.post(`${baseUrl}/api/register`, user);
+        localStorage.setItem("token", res.data.token);
         setemail("");
         setpass("");
-        history.push("/Login");
+        setpass2("");
+        setname("");
+        console.log(res.data);
+        // navigate("/Kampus");
       } catch (err) {
         console.log(err);
       }

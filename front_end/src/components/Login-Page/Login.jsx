@@ -8,9 +8,11 @@ import axios from "axios";
 
 function Login() {
   const navigate = useNavigate();
-  const baseUrl = "http://restapi.adequateshop.com";
+  const baseUrl = "https://reqres.in";
   const [emailval, setemailval] = useState("");
   const [passval, setpassval] = useState("");
+  const [error, seterror] = useState("");
+  const [isError, setisError] = useState(false);
   const email = emailval;
   const password = passval;
   const userlogin = async () => {
@@ -19,13 +21,14 @@ function Login() {
       password,
     };
     try {
-      const res = await axios.post(`${baseUrl}/api/authaccount/login`, user);
+      const res = await axios.post(`${baseUrl}/api/login`, user);
       localStorage.setItem("token", res.data.token);
       setemailval("");
       setpassval("");
-      navigate("/Kampus");
+      // navigate("/Kampus");
     } catch (err) {
-      console.log(err);
+      seterror(err.response.data.message);
+      setisError(true);
     }
   };
 
@@ -69,6 +72,12 @@ function Login() {
                   >
                     Login
                   </button>
+                  {isError && (
+                    <div className="error">
+                      <br />
+                      <p>Mohon diperiksa kembali yakkk</p>
+                    </div>
+                  )}
                 </form>
                 <div className="footer">
                   <h6>
