@@ -31,7 +31,7 @@ const Footer = () => {
             <div class="col copyright">
               <p class="">
                 <small class="text-white-50">
-                  <center>© 2022 Carkam. All Rights Reserved.</center>
+                  <center>© 2022 CARKAMID. All Rights Reserved.</center>
                 </small>
               </p>
             </div>
