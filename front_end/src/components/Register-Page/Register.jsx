@@ -58,7 +58,7 @@ const Register = () => {
                         </div>
                         <input class="form-check-input me-3" type="checkbox" value="" id="form2Example3c" />
                         <label class="form-check-label pb-4" for="form2Example3">
-                          I agree all statements in Terms of service
+                          I Agree All Statements in Terms of Service
                         </label>
                         <Button variant="dark w-100" type="submit">
                           S U B M I T
