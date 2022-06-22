@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { unstable_HistoryRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Login.scss";
 import { Link } from "react-router-dom";
 import logo from "./image/logo-carkam.png";
@@ -7,8 +7,8 @@ import welcomeImg from "./image/login.png";
 import axios from "axios";
 
 function Login() {
-  const history = unstable_HistoryRouter;
-  const baseUrl = "https://my-udemy-api.herokuapp.com/api/v1";
+  const navigate = useNavigate();
+  const baseUrl = "http://restapi.adequateshop.com";
   const [emailval, setemailval] = useState("");
   const [passval, setpassval] = useState("");
   const email = emailval;
@@ -19,15 +19,13 @@ function Login() {
       password,
     };
     try {
-      const res = await axios.post(`${baseUrl}/login/signin`, user);
-      console.log("suksek");
+      const res = await axios.post(`${baseUrl}/api/authaccount/login`, user);
       localStorage.setItem("token", res.data.token);
       setemailval("");
       setpassval("");
-      history.push("/Kampus");
+      navigate("/Kampus");
     } catch (err) {
-      alert("Ups salah");
-      console.log("salah");
+      console.log(err);
     }
   };
 
@@ -63,7 +61,7 @@ function Login() {
                     id="pwd1"
                   />
                   <button
-                    type="submit"
+                    type="button"
                     id="sub_butt"
                     onClick={() => {
                       userlogin();
