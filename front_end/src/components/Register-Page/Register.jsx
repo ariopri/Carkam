@@ -91,7 +91,7 @@ const Register = () => {
 
                         <Button
                           variant="dark w-100"
-                          type="submit"
+                          type="button"
                           onClick={register}
                         >
                           S U B M I T
