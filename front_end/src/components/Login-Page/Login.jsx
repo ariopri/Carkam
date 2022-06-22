@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { unstable_HistoryRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Login.scss";
 import { Link } from "react-router-dom";
 import logo from "./image/logo-carkam.png";
@@ -7,10 +7,12 @@ import welcomeImg from "./image/login.png";
 import axios from "axios";
 
 function Login() {
-  const history = unstable_HistoryRouter;
-  const baseUrl = "https://my-udemy-api.herokuapp.com/api/v1";
+  const navigate = useNavigate();
+  const baseUrl = "https://reqres.in";
   const [emailval, setemailval] = useState("");
   const [passval, setpassval] = useState("");
+  const [error, seterror] = useState("");
+  const [isError, setisError] = useState(false);
   const email = emailval;
   const password = passval;
   const userlogin = async () => {
@@ -19,15 +21,14 @@ function Login() {
       password,
     };
     try {
-      const res = await axios.post(`${baseUrl}/login/signin`, user);
-      console.log("suksek");
+      const res = await axios.post(`${baseUrl}/api/login`, user);
       localStorage.setItem("token", res.data.token);
       setemailval("");
       setpassval("");
-      history.push("/Kampus");
+      // navigate("/Kampus");
     } catch (err) {
-      alert("Ups salah");
-      console.log("salah");
+      seterror(err.response.data.message);
+      setisError(true);
     }
   };
 
@@ -63,7 +64,7 @@ function Login() {
                     id="pwd1"
                   />
                   <button
-                    type="submit"
+                    type="button"
                     id="sub_butt"
                     onClick={() => {
                       userlogin();
@@ -71,6 +72,12 @@ function Login() {
                   >
                     Login
                   </button>
+                  {isError && (
+                    <div className="error">
+                      <br />
+                      <p>Mohon diperiksa kembali yakkk</p>
+                    </div>
+                  )}
                 </form>
                 <div className="footer">
                   <h6>
