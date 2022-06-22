@@ -25,7 +25,7 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       setemailval("");
       setpassval("");
-      // navigate("/Kampus");
+      navigate("/Kampus");
     } catch (err) {
       seterror(err.response.data.message);
       setisError(true);
