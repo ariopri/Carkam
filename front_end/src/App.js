@@ -13,7 +13,6 @@ import DetailKampus from "./components/DetailKampus";
 import Masukkanreview from "./components/Masukkanreview";
 import InputUnivBaru from "./components/InputUnivBaru";
 import EditUniv from "./components/EditUniv";
-import { useParams } from "react-router-dom";
 
 function App() {
   const peringatan = () => {
@@ -35,7 +34,7 @@ function App() {
           <Route path="/Kampus" element={<Kampus />} />
           <Route path="/Kampus/detail/:id" element={<DetailKampus />} />
           <Route
-            path="/Kampus/detail/review"
+            path="/Kampus/detail/review/:id"
             element={<Masukkanreview peringatan={peringatan} />}
           />
           <Route path="/Kampus/create" element={<InputUnivBaru />} />

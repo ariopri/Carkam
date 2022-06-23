@@ -13,6 +13,7 @@ const InfoKampus = () => {
   const { id } = useParams();
 
   const [data, setdata] = useState([]);
+  const [data2, setdata2] = useState([]);
 
   const getdata = async () => {
     const res = await axios.get(`${baseUrl}/api/users/${id}`, {
@@ -20,9 +21,18 @@ const InfoKampus = () => {
         Authorization: token,
       },
     });
+    const res2 = await axios.get(`${baseUrl}/api/users`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+
     setdata(res.data.data);
+    setdata2(res2.data.data);
     console.log(res.data.data);
+    console.log(res2.data.data);
   };
+
   useEffect(() => {
     getdata();
   }, []);
@@ -53,19 +63,29 @@ const InfoKampus = () => {
                     </p>
                     <button className="btn btn-success  w-100  ">
                       <a
-                        href="/Kampus/detail/review"
                         className="btn text-light"
+                        href={`/Kampus/detail/review/${data.id}`}
                       >
                         <b>R e v i e w</b>
                       </a>
                     </button>
                     <div class="container">
-                      <div class="row pt-3">
+                      {data2.map((item) => {
+                        return (
+                          <div class="row pt-3">
+                            <div class="col-md-12">{item.first_name}</div>
+                            <footer className="blockquote-footer">
+                              {item.email}
+                            </footer>
+                          </div>
+                        );
+                      })}
+                      {/* <div class="row pt-3">
                         <div class="col-md-12">{data.first_name}</div>
                         <footer className="blockquote-footer">
                           {data.email}
                         </footer>
-                      </div>
+                      </div> */}
                     </div>
                   </blockquote>
                 </Card.Body>
