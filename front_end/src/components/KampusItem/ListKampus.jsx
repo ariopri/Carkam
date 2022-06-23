@@ -56,12 +56,6 @@ const ListKampus = (props) => {
                         <ListGroup.Item>{item.email}</ListGroup.Item>
                       </ListGroup>
                       <Card.Body>
-                        {/* <Card.Link
-                          href="/Kampus/detail"
-                          className="btn btn-success"
-                        >
-                          Lihat
-                        </Card.Link> */}
                         <a
                           className="btn btn-success w-100"
                           href={`/Kampus/detail/${item.id}`}
