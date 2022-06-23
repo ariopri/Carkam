@@ -1,5 +1,23 @@
+import { useEffect, useState } from "react";
 import logo from "./Login-Page/image/logo-carkam.png";
 const NavigationBar = () => {
+  const token = localStorage.getItem("token");
+  const [isLogin, setIsLogin] = useState(false);
+
+  const cekkin = async () => {
+    if (token) {
+      setIsLogin(true);
+    }
+  };
+
+  useEffect(() => {
+    cekkin();
+  }, []);
+
+  function logout() {
+    localStorage.removeItem("token");
+    setIsLogin(false);
+  }
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-dark">
@@ -43,9 +61,26 @@ const NavigationBar = () => {
             </ul>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
-                <a className="nav-link btn btn-warning text-dark" href="/Login">
-                  <b> Login</b>
-                </a>
+                <button type="button" className="btn btn-dark">
+                  <b>
+                    {isLogin ? (
+                      <a
+                        className="nav-link btn btn-warning text-dark"
+                        onClick={logout}
+                        href="/"
+                      >
+                        <b>Logout</b>
+                      </a>
+                    ) : (
+                      <a
+                        href="/Login"
+                        className="nav-link btn btn-warning text-dark"
+                      >
+                        <b>{isLogin ? "Login" : "Login"}</b>
+                      </a>
+                    )}
+                  </b>
+                </button>
               </li>
             </ul>
           </div>
