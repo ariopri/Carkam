@@ -1,5 +1,6 @@
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import InfoKampus from "../DetailKampusItem/InfoKampus";
 import KM from "./image/KM.png";
 import axios from "axios";
 import { useEffect } from "react";
@@ -24,18 +25,23 @@ const ListKampus = (props) => {
     getdata();
   }, []);
 
+  const kiyimdata = data.filter((item) => {
+    return item.first_name.toLowerCase().includes(dapat.toLowerCase());
+    console.log(item.first_name);
+  });
+
   return (
     <>
       <div>
         <center>
           <h3>Pilih sepuasnya dan bedah hingga dapat</h3>
         </center>
-        <div class="container">
-          <div class="row pt-3 ">
+        <div className="container">
+          <div className="row pt-3 ">
             {data.map((item) => {
               if (item.first_name.toLowerCase().includes(dapat)) {
                 return (
-                  <div class="col-md-3 pb-3 ">
+                  <div className="col-md-3 pb-3 ">
                     <Card style={{ width: "18rem" }}>
                       <Card.Img variant="top" src={KM} />
                       <Card.Body>
@@ -50,12 +56,18 @@ const ListKampus = (props) => {
                         <ListGroup.Item>{item.email}</ListGroup.Item>
                       </ListGroup>
                       <Card.Body>
-                        <Card.Link
-                          href={"/Kampus/detail/`}" + item.id}
+                        {/* <Card.Link
+                          href="/Kampus/detail"
                           className="btn btn-success"
                         >
                           Lihat
-                        </Card.Link>
+                        </Card.Link> */}
+                        <a
+                          className="btn btn-success w-100"
+                          href={`/Kampus/detail/${item.id}`}
+                        >
+                          Lihat
+                        </a>
                       </Card.Body>
                     </Card>
                   </div>
