@@ -1,6 +1,31 @@
 import Logo from "./image/KM.png";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+
 const InfoKampus = () => {
+  const baseUrl = "https://reqres.in";
+  const token = localStorage.getItem("token");
+
+  const { id } = useParams();
+
+  const [data, setdata] = useState([]);
+
+  const getdata = async () => {
+    const res = await axios.get(`${baseUrl}/api/users/${id}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    setdata(res.data.data);
+    console.log(res.data.data);
+  };
+  useEffect(() => {
+    getdata();
+  }, []);
   return (
     <>
       <div className="pt-3">
@@ -12,21 +37,7 @@ const InfoKampus = () => {
             <div class="col-md-6 pt-5">
               <Card>
                 <Card.Header className="bg-success text-light">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <b>Kampus Merdeka &nbsp;</b>
-                    </div>
-                    <div class="col-md-6">
-                      <div className="d-flex flex-row-reverse mt-">
-                        <a
-                          href="/Kampus/detail/update"
-                          className="btn btn-danger text-light "
-                        >
-                          <b>Ubah / Hapus</b>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                  <b>{data.first_name}</b>
                 </Card.Header>
                 <Card.Body>
                   <blockquote className="blockquote mb-0">
@@ -34,14 +45,11 @@ const InfoKampus = () => {
                       <b>Info singkat kampus</b>
                     </p>
                     <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Ullam, praesentium nam dignissimos repellendus voluptates
-                      tempore.
+                      {data.first_name} {data.last_name}
                     </p>
                     <br />
                     <p>
-                      <b>Jurusan : </b> Teknik Informatika, Teknik Sipil, Teknik
-                      Mesin.
+                      <b>Jurusan : </b> {data.email}
                     </p>
                     <button className="btn btn-success  w-100  ">
                       <a
@@ -53,21 +61,9 @@ const InfoKampus = () => {
                     </button>
                     <div class="container">
                       <div class="row pt-3">
-                        <div class="col-md-12">Dodi</div>
+                        <div class="col-md-12">{data.first_name}</div>
                         <footer className="blockquote-footer">
-                          Kampusnya bagus gaes
-                        </footer>
-                      </div>
-                      <div class="row pt-3">
-                        <div class="col-md-12">Dodi</div>
-                        <footer className="blockquote-footer">
-                          Kampusnya bagus gaes
-                        </footer>
-                      </div>
-                      <div class="row pt-3">
-                        <div class="col-md-12">Dodi</div>
-                        <footer className="blockquote-footer">
-                          Kampusnya bagus gaes
+                          {data.email}
                         </footer>
                       </div>
                     </div>

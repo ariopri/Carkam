@@ -13,6 +13,8 @@ import DetailKampus from "./components/DetailKampus";
 import Masukkanreview from "./components/Masukkanreview";
 import InputUnivBaru from "./components/InputUnivBaru";
 import EditUniv from "./components/EditUniv";
+import { useParams } from "react-router-dom";
+
 function App() {
   const peringatan = () => {
     alert("Mohon mengisi dengan baik sebelum meriview");
@@ -31,7 +33,7 @@ function App() {
           <Route path="/Register" element={<Register />} />
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="/Kampus" element={<Kampus />} />
-          <Route path="/Kampus/detail" element={<DetailKampus />} />
+          <Route path="/Kampus/detail/:id" element={<DetailKampus />} />
           <Route
             path="/Kampus/detail/review"
             element={<Masukkanreview peringatan={peringatan} />}
