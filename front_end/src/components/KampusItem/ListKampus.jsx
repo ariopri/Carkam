@@ -4,7 +4,6 @@ import KM from "./image/KM.png";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { CardImg } from "react-bootstrap";
 
 const ListKampus = (props) => {
   const dapat = props.cari;
@@ -12,7 +11,6 @@ const ListKampus = (props) => {
   const token = localStorage.getItem("token");
 
   const [data, setdata] = useState([]);
-  const [search, setsearch] = useState("");
 
   const getdata = async () => {
     const res = await axios.get(`${baseUrl}/api/users`, {
@@ -53,7 +51,7 @@ const ListKampus = (props) => {
                       </ListGroup>
                       <Card.Body>
                         <Card.Link
-                          href="/Kampus/detail"
+                          href={"/Kampus/detail/`}" + item.id}
                           className="btn btn-success"
                         >
                           Lihat
