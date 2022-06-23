@@ -1,6 +1,11 @@
 import Systemnya from "./image/FAQ-Vector.png";
+import { useState } from "react";
+import ListKampus from "./ListKampus";
 
 const Pencarian = () => {
+  const [cari, setcari] = useState("");
+  const kirim = cari;
+
   return (
     <>
       <div class="container">
@@ -19,10 +24,13 @@ const Pencarian = () => {
                 className="form-control siplaceholder"
                 placeholder="C A R I K A M P U S"
                 aria-describedby="button-addon2"
+                onChange={(e) => {
+                  setcari(e.target.value);
+                }}
               ></input>
               <button
                 className="btn btn-success"
-                type="button"
+                type="submit"
                 id="button-addon2"
               >
                 Cari
@@ -41,6 +49,7 @@ const Pencarian = () => {
           </div>
         </div>
       </div>
+      <ListKampus cari={kirim} />
     </>
   );
 };

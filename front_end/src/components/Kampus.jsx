@@ -7,7 +7,7 @@ const Kampus = () => {
     <>
       <Container>
         <Pencarian />
-        <ListKampus />
+        {/* <ListKampus /> */}
       </Container>
     </>
   );
