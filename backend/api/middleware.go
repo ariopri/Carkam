@@ -104,4 +104,3 @@ func (api *API) POST(next http.Handler) http.Handler {
 		next.ServeHTTP(w, r)
 	})
 }
-

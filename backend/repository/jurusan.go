@@ -2,7 +2,7 @@ package repository
 
 import "database/sql"
 
-type KampusRepository struct {
+type JurusanRepository struct {
 	db *sql.DB
 }
 
