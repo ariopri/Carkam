@@ -73,7 +73,6 @@ func (r *ReviewRepository) FetchReviewByUserID(UserID int64) ([]*Review, error) 
 	return review, nil
 }
 
-
 func (r *ReviewRepository) FetchReviewByIsian(Isian string) ([]*Review, error) {
 	var review []*Review
 	query := `
