@@ -6,6 +6,14 @@ type ReviewRepository struct {
 	db *sql.DB
 }
 
+type Review struct {
+	ID        int64  `json:"id"`
+	IdUSer    int64  `json:"id_user"`
+	IdKampus  int64  `json:"id_kampus"`
+	IdJurusan int64  `json:"id_jurusan"`
+	Isian     string `json:"isian"`
+}
+
 func NewReviewRepository(db *sql.DB) *ReviewRepository {
 	return &ReviewRepository{db: db}
 }
