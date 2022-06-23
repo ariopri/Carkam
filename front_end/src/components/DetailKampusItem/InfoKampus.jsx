@@ -80,12 +80,6 @@ const InfoKampus = () => {
                           </div>
                         );
                       })}
-                      {/* <div class="row pt-3">
-                        <div class="col-md-12">{data.first_name}</div>
-                        <footer className="blockquote-footer">
-                          {data.email}
-                        </footer>
-                      </div> */}
                     </div>
                   </blockquote>
                 </Card.Body>
