@@ -10,9 +10,9 @@ import (
 func main() {
 	db := &db.CsvDB{}
 	usersRepo := repository.NewUserRepository(db)
-	productsRepo := repository.NewProductRepository(db)
-
-	mainAPI := api.NewAPI(usersRepo, productsRepo)
-	mainAPI.Start()
-
+	jurusanRepo := repository.NewJurusanRepository(db)
+	kampusRepo := repository.NewKampusRepository(db)
+	reviewRepo := repository.NewReviewRepository(db)
+	api := api.NewAPI(usersRepo, jurusanRepo, kampusRepo, reviewRepo)
+	api.Start()
 }
