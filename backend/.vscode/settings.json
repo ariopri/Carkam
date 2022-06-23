@@ -9,6 +9,6 @@
         "go": true
     },
     "gopls": {
-        "experimentalWorkspaceModule": true,
+        "experimentalWorkspaceModule": false,
     }
 }

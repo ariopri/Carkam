@@ -100,7 +100,6 @@ func HandlerRegister(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(signedToken))
 }
 
-
 func HandlerLogin(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		http.Error(w, "Unsupported http method", http.StatusBadRequest)
@@ -127,7 +126,7 @@ func HandlerLogin(w http.ResponseWriter, r *http.Request) {
 			ExpiresAt: time.Now().Add(LOGIN_EXPIRATION_DURATION).Unix(),
 		},
 		Username: userInfo["username"].(string),
-		Email:    userInfo["email"].(string)
+		Email:    userInfo["email"].(string),
 	}
 
 	token := jwt.NewWithClaims(

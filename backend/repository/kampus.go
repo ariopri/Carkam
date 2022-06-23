@@ -6,6 +6,14 @@ type KampusRepository struct {
 	db *sql.DB
 }
 
+type Kampus struct {
+	Id       int64  `json:"id"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Jurusan1 string `json:"jurusan1"`
+	Jurusan2 string `json:"jurusan2"`
+}
+
 func NewKampusRepository(db *sql.DB) *KampusRepository {
 	return &KampusRepository{db: db}
 }
@@ -22,7 +30,7 @@ func (k *KampusRepository) FetchKampusByID(id int64) ([]*Kampus, error) {
 	defer rows.Close()
 	for rows.Next() {
 		var kampusTemp Kampus
-		err := rows.Scan(&kampusTemp.ID, &kampusTemp.Name, &kampusTemp.Email, &kampusTemp.Jurusan1, &kampusTemp.Jurusan2)
+		err := rows.Scan(&kampusTemp.Id, &kampusTemp.Name, &kampusTemp.Email, &kampusTemp.Jurusan1, &kampusTemp.Jurusan2)
 		if err != nil {
 			return nil, err
 		}
@@ -43,7 +51,7 @@ func (k *KampusRepository) FetchKampusByName(name string) ([]*Kampus, error) {
 	defer rows.Close()
 	for rows.Next() {
 		var kampusTemp Kampus
-		err := rows.Scan(&kampusTemp.ID, &kampusTemp.Name, &kampusTemp.Email, &kampusTemp.Jurusan1, &kampusTemp.Jurusan2)
+		err := rows.Scan(&kampusTemp.Id, &kampusTemp.Name, &kampusTemp.Email, &kampusTemp.Jurusan1, &kampusTemp.Jurusan2)
 		if err != nil {
 			return nil, err
 		}

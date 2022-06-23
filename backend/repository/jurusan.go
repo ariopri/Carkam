@@ -6,6 +6,12 @@ type JurusanRepository struct {
 	db *sql.DB
 }
 
+type Jurusan struct {
+	ID       int64  `json:"id"`
+	Name     string `json:"name"`
+	IdKampus int64  `json:"id_kampus"`
+}
+
 func NewJurusanRepository(db *sql.DB) *JurusanRepository {
 	return &JurusanRepository{db: db}
 }
