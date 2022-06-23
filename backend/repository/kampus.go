@@ -13,7 +13,7 @@ func NewKampusRepository(db *sql.DB) *KampusRepository {
 func (k *KampusRepository) FetchKampusByID(id int64) ([]*Kampus, error) {
 	var kampus []*Kampus
 	query := `
-		SELECT * FROM kampus WHERE id = ?
+		SELECT 	id, name, email,jurusan1, jurusan2 FROM kampus WHERE id = ?
 	`
 	rows, err := k.db.Query(query, id)
 	if err != nil {
@@ -22,7 +22,7 @@ func (k *KampusRepository) FetchKampusByID(id int64) ([]*Kampus, error) {
 	defer rows.Close()
 	for rows.Next() {
 		var kampusTemp Kampus
-		err := rows.Scan(&kampusTemp.ID, &kampusTemp.Name, &kampusTemp.Email, &kampusTemp.Info, &kampusTemp.Jurusan1, &kampusTemp.Jurusan2)
+		err := rows.Scan(&kampusTemp.ID, &kampusTemp.Name, &kampusTemp.Email, &kampusTemp.Jurusan1, &kampusTemp.Jurusan2)
 		if err != nil {
 			return nil, err
 		}
@@ -34,7 +34,7 @@ func (k *KampusRepository) FetchKampusByID(id int64) ([]*Kampus, error) {
 func (k *KampusRepository) FetchKampusByName(name string) ([]*Kampus, error) {
 	var kampus []*Kampus
 	query := `
-		SELECT * FROM kampus WHERE name = ?
+		SELECT 	id, name, email,jurusan1, jurusan2 FROM kampus WHERE name = ?
 	`
 	rows, err := k.db.Query(query, name)
 	if err != nil {
@@ -43,49 +43,7 @@ func (k *KampusRepository) FetchKampusByName(name string) ([]*Kampus, error) {
 	defer rows.Close()
 	for rows.Next() {
 		var kampusTemp Kampus
-		err := rows.Scan(&kampusTemp.ID, &kampusTemp.Name, &kampusTemp.Email, &kampusTemp.Info, &kampusTemp.Jurusan1, &kampusTemp.Jurusan2)
-		if err != nil {
-			return nil, err
-		}
-		kampus = append(kampus, &kampusTemp)
-	}
-	return kampus, nil
-}
-
-func (k *KampusRepository) FetchKampusByEmail(email string) ([]*Kampus, error) {
-	var kampus []*Kampus
-	query := `
-		SELECT * FROM kampus WHERE email = ?
-	`
-	rows, err := k.db.Query(query, email)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	for rows.Next() {
-		var kampusTemp Kampus
-		err := rows.Scan(&kampusTemp.ID, &kampusTemp.Name, &kampusTemp.Email, &kampusTemp.Info, &kampusTemp.Jurusan1, &kampusTemp.Jurusan2)
-		if err != nil {
-			return nil, err
-		}
-		kampus = append(kampus, &kampusTemp)
-	}
-	return kampus, nil
-}
-
-func (k *KampusRepository) FetchKampusByJurusan(jurusan string) ([]*Kampus, error) {
-	var kampus []*Kampus
-	query := `
-		SELECT * FROM kampus WHERE jurusan1 = ? OR jurusan2 = ?
-	`
-	rows, err := k.db.Query(query, jurusan, jurusan)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	for rows.Next() {
-		var kampusTemp Kampus
-		err := rows.Scan(&kampusTemp.ID, &kampusTemp.Name, &kampusTemp.Email, &kampusTemp.Info, &kampusTemp.Jurusan1, &kampusTemp.Jurusan2)
+		err := rows.Scan(&kampusTemp.ID, &kampusTemp.Name, &kampusTemp.Email, &kampusTemp.Jurusan1, &kampusTemp.Jurusan2)
 		if err != nil {
 			return nil, err
 		}
@@ -97,7 +55,7 @@ func (k *KampusRepository) FetchKampusByJurusan(jurusan string) ([]*Kampus, erro
 func (k *KampusRepository) FetchAllKampus() ([]*Kampus, error) {
 	var kampus []*Kampus
 	query := `
-		SELECT * FROM kampus
+		SELECT 	id, name, email,jurusan1, jurusan2  FROM kampus
 	`
 	rows, err := k.db.Query(query)
 	if err != nil {
@@ -106,7 +64,7 @@ func (k *KampusRepository) FetchAllKampus() ([]*Kampus, error) {
 	defer rows.Close()
 	for rows.Next() {
 		var kampusTemp Kampus
-		err := rows.Scan(&kampusTemp.ID, &kampusTemp.Name, &kampusTemp.Email, &kampusTemp.Info, &kampusTemp.Jurusan1, &kampusTemp.Jurusan2)
+		err := rows.Scan(&kampusTemp.Id, &kampusTemp.Name, &kampusTemp.Email, &kampusTemp.Jurusan1, &kampusTemp.Jurusan2)
 		if err != nil {
 			return nil, err
 		}
