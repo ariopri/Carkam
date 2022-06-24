@@ -37,7 +37,7 @@ function App() {
             path="/Kampus/detail/review/:id"
             element={<Masukkanreview peringatan={peringatan} />}
           />
-          <Route path="/Kampus/create/:id" element={<InputUnivBaru />} />
+          <Route path="/Kampus/create" element={<InputUnivBaru />} />
           <Route
             path="/Kampus/detail/update"
             element={<EditUniv peringatan2={peringatan2} />}
