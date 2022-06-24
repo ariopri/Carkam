@@ -6,6 +6,14 @@ type ReviewRepository struct {
 	db *sql.DB
 }
 
+type Review struct {
+	ID        int64  `json:"id"`
+	IdUSer    int64  `json:"id_user"`
+	IdKampus  int64  `json:"id_kampus"`
+	IdJurusan int64  `json:"id_jurusan"`
+	Isian     string `json:"isian"`
+}
+
 func NewReviewRepository(db *sql.DB) *ReviewRepository {
 	return &ReviewRepository{db: db}
 }
@@ -13,7 +21,7 @@ func NewReviewRepository(db *sql.DB) *ReviewRepository {
 func (r *ReviewRepository) FetchReviewByID(id int64) ([]*Review, error) {
 	var review []*Review
 	query := `
-		SELECT * FROM review WHERE id = ? AND deleted_at IS NULL ORDER BY created_at DESC LIMIT 10 OFFSET 0
+		SELECT id, id_user, id_kampus, id_jurusan, isian FROM review WHERE id = ?
 	`
 	rows, err := r.db.Query(query, id)
 	if err != nil {
@@ -22,7 +30,7 @@ func (r *ReviewRepository) FetchReviewByID(id int64) ([]*Review, error) {
 	defer rows.Close()
 	for rows.Next() {
 		var reviewTemp Review
-		err := rows.Scan(&reviewTemp.ID, &reviewTemp.KampusID, &reviewTemp.UserID, &reviewTemp.Jurusan, &reviewTemp.Isian)
+		err := rows.Scan(&reviewTemp.ID, &reviewTemp.IdUSer, &reviewTemp.IdKampus, &reviewTemp.IdJurusan, &reviewTemp.Isian)
 		if err != nil {
 			return nil, err
 		}
@@ -31,19 +39,19 @@ func (r *ReviewRepository) FetchReviewByID(id int64) ([]*Review, error) {
 	return review, nil
 }
 
-func (r *ReviewRepository) FetchReviewByKampusID(Jurusan string) ([]*Review, error) {
+func (r *ReviewRepository) FetchReviewByKampusID(Kampus string) ([]*Review, error) {
 	var review []*Review
 	query := `
-	select * from review where nama_kampus = 'Universitas Indonesia' and jurusan = 'Teknik'
+	select table review from review where id_kampus = ?
 	`
-	rows, err := r.db.Query(query, Jurusan)
+	rows, err := r.db.Query(query, Kampus)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 	for rows.Next() {
 		var reviewTemp Review
-		err := rows.Scan(&reviewTemp.ID, &reviewTemp.KampusID, &reviewTemp.UserID, &reviewTemp.Jurusan, &reviewTemp.Isian)
+		err := rows.Scan(&reviewTemp.ID, &reviewTemp.IdUSer, &reviewTemp.IdKampus, &reviewTemp.IdJurusan, &reviewTemp.Isian)
 		if err != nil {
 			return nil, err
 		}
@@ -55,7 +63,7 @@ func (r *ReviewRepository) FetchReviewByKampusID(Jurusan string) ([]*Review, err
 func (r *ReviewRepository) FetchReviewByUserID(UserID int64) ([]*Review, error) {
 	var review []*Review
 	query := `
-		SELECT * FROM review WHERE user_id = ? AND deleted_at IS NULL ORDER BY created_at DESC LIMIT 10 OFFSET 0
+		SELECT * FROM review WHERE id_user = ?
 	`
 	rows, err := r.db.Query(query, UserID)
 	if err != nil {
@@ -64,28 +72,7 @@ func (r *ReviewRepository) FetchReviewByUserID(UserID int64) ([]*Review, error) 
 	defer rows.Close()
 	for rows.Next() {
 		var reviewTemp Review
-		err := rows.Scan(&reviewTemp.ID, &reviewTemp.KampusID, &reviewTemp.UserID, &reviewTemp.Jurusan, &reviewTemp.Isian)
-		if err != nil {
-			return nil, err
-		}
-		review = append(review, &reviewTemp)
-	}
-	return review, nil
-}
-
-func (r *ReviewRepository) FetchReviewByJurusan(Jurusan string) ([]*Review, error) {
-	var review []*Review
-	query := `
-		SELECT * FROM review WHERE jurusan = ? AND deleted_at IS NULL ORDER BY created_at DESC LIMIT 10 OFFSET 0
-	`
-	rows, err := r.db.Query(query, Jurusan)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	for rows.Next() {
-		var reviewTemp Review
-		err := rows.Scan(&reviewTemp.ID, &reviewTemp.KampusID, &reviewTemp.UserID, &reviewTemp.Jurusan, &reviewTemp.Isian)
+		err := rows.Scan(&reviewTemp.ID, &reviewTemp.IdUSer, &reviewTemp.IdKampus, &reviewTemp.IdJurusan, &reviewTemp.Isian)
 		if err != nil {
 			return nil, err
 		}
@@ -97,7 +84,7 @@ func (r *ReviewRepository) FetchReviewByJurusan(Jurusan string) ([]*Review, erro
 func (r *ReviewRepository) FetchReviewByIsian(Isian string) ([]*Review, error) {
 	var review []*Review
 	query := `
-		SELECT * FROM review WHERE isian = ? AND deleted_at IS NULL ORDER BY created_at DESC LIMIT 10 OFFSET 0
+		SELECT * FROM review WHERE isian = ? 
 	`
 	rows, err := r.db.Query(query, Isian)
 	if err != nil {
@@ -106,7 +93,8 @@ func (r *ReviewRepository) FetchReviewByIsian(Isian string) ([]*Review, error) {
 	defer rows.Close()
 	for rows.Next() {
 		var reviewTemp Review
-		err := rows.Scan(&reviewTemp.ID, &reviewTemp.KampusID, &reviewTemp.UserID, &reviewTemp.Jurusan, &reviewTemp.Isian)
+		//review
+		err := rows.Scan(&reviewTemp.ID, &reviewTemp.IdUSer, &reviewTemp.IdKampus, &reviewTemp.IdJurusan, &reviewTemp.Isian)
 		if err != nil {
 			return nil, err
 		}

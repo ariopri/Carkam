@@ -1,5 +1,4 @@
 import Container from "react-bootstrap/esm/Container";
-import ListKampus from "./KampusItem/ListKampus";
 import Pencarian from "./KampusItem/Pencarian";
 
 const Kampus = () => {
@@ -7,7 +6,6 @@ const Kampus = () => {
     <>
       <Container>
         <Pencarian />
-        <ListKampus />
       </Container>
     </>
   );

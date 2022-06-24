@@ -7,25 +7,21 @@ import (
 
 type API struct {
 	usersRepo       repository.UserRepository
-	productsRepo    repository.ProductRepository
-	cartItemRepo    repository.CartItemRepository
-	transactionRepo repository.TransactionRepository
+	jurusanRepo		repository.JurusanRepository
+	kampusRepo		repository.KampusRepository
+	reviewRepo		repository.ReviewRepository
 	mux             *http.ServerMux
 }
 
-func NewAPI(usersRepo repository.UserRepository, productsRepo repository.ProductRepository, cartItemRepo repository.CartItemRepository, transactionRepo repository.TransactionRepository) API {
-	mux := http.NewServeMux()
-	api := API{
-		usersRepo, productsRepo, cartItemRepo, transactionRepo, mux,
+func NewAPI(usersRepo repository.UserRepository, jurusanRepo repository.JurusanRepository, kampusRepo repository.KampusRepository, reviewRepo repository.ReviewRepository) API {
+	mux := http.NewServeMux() {
+		usersRepo, jurusanRepo, kampusRepo, reviewRepo, mux,
 	}
 	mux.HandleFunc("/api/user/login", api.login)
 	mux.HandleFunc("/api/user/logout", api.logout)
-
-	mux.Handle("/api/dashboard", api.AuthMiddleWare(http.HandlerFunc(api.dashboard)))
-	mux.Handle("/api/products", api.AuthMiddleWare(http.HandlerFunc(api.productList)))
-	mux.Handle("/api/cart/add", api.AuthMiddleWare(http.HandlerFunc(api.addToCart)))
-	mux.Handle("/api/cart/clear", api.AuthMiddleWare(http.HandlerFunc(api.clearCart)))
-	mux.Handle("/api/carts", api.AuthMiddleWare(http.HandlerFunc(api.cartList)))
+	mux.HandleFunc("/api/user/register", api.register)
+	mux.HandleFunc("/api/jurusan/getbyname", api.getJurusanByName)
+	mux.HandleFunc("/api/kampus/getbyname", api.getKampusByName)
 
 	return api
 }
@@ -36,5 +32,5 @@ func (api *API) Handler() *http.ServeMux {
 
 func (api *API) Start() {
 	fmt.Println("starting web server at http://localhost:9090/")
-	http.ListenAndServe(":8080", api.Handler())
+	http.ListenAndServe(":9090", api.Handler())
 }

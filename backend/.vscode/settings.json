@@ -1,0 +1,14 @@
+{
+    "workbench.startupEditor": "none",
+    "editor.inlineSuggest.enabled": true,
+    "github.copilot.enable": {
+        "*": true,
+        "yaml": false,
+        "plaintext": true,
+        "markdown": false,
+        "go": true
+    },
+    "gopls": {
+        "experimentalWorkspaceModule": false,
+    }
+}

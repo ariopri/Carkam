@@ -39,7 +39,6 @@ type MyClaims struct {
 	jwt.StandardClaims
 	Username string `json:"Username"`
 	Email    string `json:"Email"`
-	Group    string `json:"Group"`
 }
 
 var APPLICATION_NAME = "Simple JWT App"
@@ -66,6 +65,39 @@ func HandlerDashboard(w http.ResponseWriter, r *http.Request) {
 	userInfo := r.Context().Value("userInfo").(jwt.MapClaims)
 	message := fmt.Sprintf("hello %s (%s)", userInfo["Username"], userInfo["Group"])
 	w.Write([]byte(message))
+}
+
+func HandlerRegister(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+	username, email, password, ok := r.BasicAuth()
+	if !ok {
+		http.Error(w, "Invalid username or password basic", http.StatusBadRequest)
+		return
+	}
+	ok, _ = authenticateUser(username, password)
+	if ok {
+		http.Error(w, "Username already exists", http.StatusBadRequest)
+		return
+	}
+	data := M{
+		"username": username,
+		"email":    email,
+		"password": password,
+	}
+	data = append(data, data)
+	token := jwt.NewWithClaims(
+		JWT_SIGNING_METHOD,
+		data,
+	)
+	signedToken, err := token.SignedString(JWT_SIGNATURE_KEY)
+	if err != nil {
+		http.Error(w, "Failed to sign token", http.StatusInternalServerError)
+		return
+	}
+	w.Write([]byte(signedToken))
 }
 
 func HandlerLogin(w http.ResponseWriter, r *http.Request) {
@@ -95,7 +127,6 @@ func HandlerLogin(w http.ResponseWriter, r *http.Request) {
 		},
 		Username: userInfo["username"].(string),
 		Email:    userInfo["email"].(string),
-		Group:    userInfo["group"].(string),
 	}
 
 	token := jwt.NewWithClaims(

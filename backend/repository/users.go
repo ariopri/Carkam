@@ -9,6 +9,13 @@ type UserRepository struct {
 	db *sql.DB
 }
 
+type User struct {
+	ID       int64  `json:"id"`
+	Username string `json:"username"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
 func NewUserRepository(db *sql.DB) *UserRepository {
 	return &UserRepository{db: db}
 }
@@ -16,7 +23,7 @@ func NewUserRepository(db *sql.DB) *UserRepository {
 func (u *UserRepository) FetchUserByID(id int64) (User, error) {
 
 	var user User
-	err := u.db.QueryRow("SELECT * FROM users WHERE id = ?", id).Scan(&user.ID, &user.Username, &user.Password, &user.Password, &user.Role, &user.Loggedin, &user.Token)
+	err := u.db.QueryRow("SELECT * FROM users WHERE id = ?", id).Scan(&user.ID, &user.Username, &user.Email, &user.Password)
 	if err != nil {
 		return user, err
 	}
@@ -35,7 +42,7 @@ func (u *UserRepository) FetchUsers() ([]User, error) {
 	var users []User
 	for rows.Next() {
 		var user User
-		err := rows.Scan(&user.ID, &user.Username, &user.Password, &user.Role, &user.Loggedin)
+		err := rows.Scan(&user.ID, &user.Username, &user.Email, &user.Password)
 		if err != nil {
 			return nil, err
 		}
@@ -56,23 +63,12 @@ func (u *UserRepository) Login(username string, password string) (*string, error
 
 }
 
-func (u *UserRepository) InsertUser(username string, password string, role string, loggedin bool) error {
+func (u *UserRepository) InsertUser(username string, email string, password string) error {
 
-	_, err := u.db.Exec("INSERT INTO users (username, password, role) VALUES (?, ?, ?, ?)", username, password, loggedin, role)
+	_, err := u.db.Exec("INSERT INTO users (username, email, password) VALUES (?, ?, ?)", username, email, password)
 	if err != nil {
 		return err
 	}
 	return nil
-
-}
-
-func (u *UserRepository) FetchUserRole(username string) (*string, error) {
-
-	var user User
-	err := u.db.QueryRow("SELECT role FROM users WHERE username = ?", username).Scan(&user.Role)
-	if err != nil {
-		return nil, err
-	}
-	return &user.Role, nil
 
 }

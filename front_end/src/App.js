@@ -13,6 +13,7 @@ import DetailKampus from "./components/DetailKampus";
 import Masukkanreview from "./components/Masukkanreview";
 import InputUnivBaru from "./components/InputUnivBaru";
 import EditUniv from "./components/EditUniv";
+
 function App() {
   const peringatan = () => {
     alert("Mohon mengisi dengan baik sebelum meriview");
@@ -31,9 +32,9 @@ function App() {
           <Route path="/Register" element={<Register />} />
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="/Kampus" element={<Kampus />} />
-          <Route path="/Kampus/detail" element={<DetailKampus />} />
+          <Route path="/Kampus/detail/:id" element={<DetailKampus />} />
           <Route
-            path="/Kampus/detail/review"
+            path="/Kampus/detail/review/:id"
             element={<Masukkanreview peringatan={peringatan} />}
           />
           <Route path="/Kampus/create" element={<InputUnivBaru />} />
