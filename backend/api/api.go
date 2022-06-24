@@ -2,7 +2,10 @@ package api
 
 import (
 	"fmt"
+	"mime/multipart"
 	"net/http"
+
+	"github.com/go-delve/delve/service/api"
 )
 
 type API struct {
@@ -15,15 +18,13 @@ type API struct {
 
 func NewAPI(usersRepo repository.UserRepository, jurusanRepo repository.JurusanRepository, kampusRepo repository.KampusRepository, reviewRepo repository.ReviewRepository) API {
 	mux := http.NewServeMux() {
-		usersRepo, jurusanRepo, kampusRepo, reviewRepo, mux,
+		mux.Hadnle("/api/users/login", api.GET(api.AuthMiddleware(http.HandlerFunc(api.HandlerLogin))))
+		mux.Hadnle("/api/users/register", api.POST(api.AuthMiddleware(http.HandlerFunc(api.HandlerRegister))))
+		mux.Hadnle("/api/users/logout", api.GET(api.AuthMiddleware(http.HandlerFunc(api.HandlerLogout))))
+		mux.Handle("api/jurusan/name", api.GET(api.AuthMiddleware(http.HandlerFunc(api.HandlerJurusanName))))
+		mux.Handle("api/kampus/name", api.GET(api.AuthMiddleware(http.HandlerFunc(api.HandlerKampusName))))	
+		return api
 	}
-	mux.HandleFunc("/api/user/login", api.login)
-	mux.HandleFunc("/api/user/logout", api.logout)
-	mux.HandleFunc("/api/user/register", api.register)
-	mux.HandleFunc("/api/jurusan/getbyname", api.getJurusanByName)
-	mux.HandleFunc("/api/kampus/getbyname", api.getKampusByName)
-
-	return api
 }
 
 func (api *API) Handler() *http.ServeMux {

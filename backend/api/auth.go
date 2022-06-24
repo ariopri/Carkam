@@ -1,4 +1,4 @@
-package main
+package api
 
 import (
 	"context"
@@ -50,54 +50,23 @@ func main() {
 	mux := new(CustomMux)
 	mux.RegisterMiddleware(MiddlewareJWTAuthorization) // /dashboard -> MiddlewareJWTAuthorization -> HandlerDashboard
 
-	mux.HandleFunc("/dashboard", HandlerDashboard)
+	mux.HandleFunc("/register", HandlerRegister)
 	mux.HandleFunc("/login", HandlerLogin)
+	mux.HandleFunc("/logout", HandlerLogout)
 
 	server := new(http.Server)
 	server.Handler = mux
-	server.Addr = ":8080"
+	server.Addr = ":9090"
 
 	fmt.Println("Starting server at", server.Addr)
 	server.ListenAndServe()
 }
 
-func HandlerDashboard(w http.ResponseWriter, r *http.Request) {
-	userInfo := r.Context().Value("userInfo").(jwt.MapClaims)
-	message := fmt.Sprintf("hello %s (%s)", userInfo["Username"], userInfo["Group"])
-	w.Write([]byte(message))
-}
-
 func HandlerRegister(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
-		w.WriteHeader(http.StatusMethodNotAllowed)
+		http.Error(w, "Unsupported http method", http.StatusBadRequest)
 		return
 	}
-	username, email, password, ok := r.BasicAuth()
-	if !ok {
-		http.Error(w, "Invalid username or password basic", http.StatusBadRequest)
-		return
-	}
-	ok, _ = authenticateUser(username, password)
-	if ok {
-		http.Error(w, "Username already exists", http.StatusBadRequest)
-		return
-	}
-	data := M{
-		"username": username,
-		"email":    email,
-		"password": password,
-	}
-	data = append(data, data)
-	token := jwt.NewWithClaims(
-		JWT_SIGNING_METHOD,
-		data,
-	)
-	signedToken, err := token.SignedString(JWT_SIGNATURE_KEY)
-	if err != nil {
-		http.Error(w, "Failed to sign token", http.StatusInternalServerError)
-		return
-	}
-	w.Write([]byte(signedToken))
 }
 
 func HandlerLogin(w http.ResponseWriter, r *http.Request) {
@@ -142,6 +111,14 @@ func HandlerLogin(w http.ResponseWriter, r *http.Request) {
 
 	tokenString, _ := json.Marshal(M{"token": signedToken})
 	w.Write([]byte(tokenString))
+}
+
+func HandlerLogout(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		http.Error(w, "Unsupported http method", http.StatusBadRequest)
+		return
+	}
+	w.Write([]byte("Logout success"))
 }
 
 func authenticateUser(username, password string) (bool, M) {

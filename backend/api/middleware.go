@@ -9,13 +9,16 @@ import (
 )
 
 func (api *API) AllowOrigin(w http.ResponseWriter, req *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:9090")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
-	w.Header().Set("Access-Control-Expose-Headers", "Authorization")
+	// localhost:9000 origin mendapat ijin akses
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:9000")
+	// semua method diperbolehkan masuk
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST")
+	// semua header diperbolehkan untuk disisipkan
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	// allow cookie
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
 
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	if req.Method == "OPTIONS" {
 		w.WriteHeader(http.StatusOK)
 	}
@@ -69,11 +72,9 @@ func (api *API) AuthMiddleWare(next http.Handler) http.Handler {
 			return
 		}
 
-		ctx := context.WithValue(r.Context(), "user", claims.User)
-		ctx = context.WithValue(ctx, "jurusan", claims.Jurusan)
-		ctx = context.WithValue(ctx, "kampus", claims.Kampus)
-		ctx = context.WithValue(ctx, "review", claims.Review)
+		ctx := context.WithValue(r.Context(), "username", claims.Username)
 		next.ServeHTTP(w, r.WithContext(ctx))
+
 	})
 }
 

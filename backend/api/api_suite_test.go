@@ -9,5 +9,5 @@ import (
 
 func TestAPICashierapp(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "APICashierapp Suite")
+	RunSpecs(t, "API Cashierapp Suite")
 }
