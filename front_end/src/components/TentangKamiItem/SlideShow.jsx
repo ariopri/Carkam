@@ -1,5 +1,5 @@
-import { Container } from "react-bootstrap";
-import Sigambar from "./image/iniprofil.png";
+import { Container } from 'react-bootstrap';
+import Sigambar from './image/iniprofil.png';
 
 const SlideShow = () => {
   return (
@@ -15,13 +15,15 @@ const SlideShow = () => {
                       <b>Our Profile</b>
                     </h3>
                     <div className="sitext">
-                      <h1>
-                        Kenali Minat dan
-                        <br />
-                        Temukan Kampus
-                        <br />
-                        Pilihanmu
-                        <br />
+                      <h1 className="fontJudul">
+                        <strong>
+                          Kenali Minat dan
+                          <br />
+                          Temukan Kampus
+                          <br />
+                          Pilihanmu
+                          <br />
+                        </strong>
                       </h1>
                       <div className="sisapcesubjudul">
                         <h5>The best companion for your brighter future</h5>

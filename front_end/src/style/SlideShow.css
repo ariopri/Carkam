@@ -1,5 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 .sibaground {
   background-image: linear-gradient(#ccffcc, white);
+}
+.fontJudul {
+  font-family: 'Roboto', sans-serif;
+}
+.bagroundreverse {
+  background-image: linear-gradient(white, #e3ffe3);
 }
 .sisapcesubjudul {
   padding-top: 5%;
@@ -9,10 +17,6 @@
 }
 .siplaceholder {
   text-align: center;
-}
-
-/* testimoni */
-.sibagtesti {
 }
 
 .kasihjarak {
@@ -44,10 +48,6 @@
 .tentangkami {
   padding-left: 10%;
   padding-right: 10%;
-}
-
-.warnateksnya {
-  text-color: #00c2cb;
 }
 
 .kasihjarak2 {
