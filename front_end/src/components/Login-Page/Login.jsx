@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./Login.scss";
-import { Link } from "react-router-dom";
-import logo from "./image/logo-carkam.png";
-import welcomeImg from "./image/login.png";
-import axios from "axios";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Login.scss';
+import { Link } from 'react-router-dom';
+import logo from './image/logo-carkam.png';
+import welcomeImg from './image/login.png';
+import axios from 'axios';
 
 function Login() {
   const navigate = useNavigate();
-  const baseUrl = "https://reqres.in";
-  const [emailval, setemailval] = useState("");
-  const [passval, setpassval] = useState("");
-  const [error, seterror] = useState("");
+  const baseUrl = 'https://reqres.in';
+  const [emailval, setemailval] = useState('');
+  const [passval, setpassval] = useState('');
+  const [error, seterror] = useState('');
   const [isError, setisError] = useState(false);
   const email = emailval;
   const password = passval;
@@ -22,9 +22,9 @@ function Login() {
     };
     try {
       const res = await axios.post(`${baseUrl}/api/login`, user);
-      localStorage.setItem("token", res.data.token);
-      setemailval("");
-      setpassval("");
+      localStorage.setItem('token', res.data.token);
+      setemailval('');
+      setpassval('');
       // navigate("/Kampus");
     } catch (err) {
       seterror(err.response.data.message);
@@ -81,8 +81,7 @@ function Login() {
                 </form>
                 <div className="footer">
                   <h6>
-                    Don't have an Account?{" "}
-                    <Link to="/Register">Register Now</Link>
+                    Don't have an Account? <Link to="/Register">Register Now</Link>
                   </h6>
                 </div>
               </div>

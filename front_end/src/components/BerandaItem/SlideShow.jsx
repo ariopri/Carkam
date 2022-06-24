@@ -1,5 +1,5 @@
-import { Container } from "react-bootstrap";
-import Sigambar from "./image/Beranda.png";
+import { Container } from 'react-bootstrap';
+import Sigambar from './image/Beranda.png';
 
 const SlideShow = () => {
   return (
@@ -13,32 +13,23 @@ const SlideShow = () => {
                   <td>
                     <div className="sitext">
                       <center>
-                        <h1>
-                          Temukan kampus
-                          <br />
-                          Terbaik Mu
-                          <br />
-                          <br />
+                        <h1 className="fontJudul">
+                          <strong>
+                            TEMUKAN KAMPUS
+                            <br />
+                            TERBAIKMU
+                            <br />
+                            <br />
+                          </strong>
                         </h1>
                         <div className="input-group mb-3">
-                          <input
-                            type="text"
-                            className="form-control siplaceholder"
-                            placeholder="C A R I K A M P U S"
-                            aria-describedby="button-addon2"
-                          ></input>
-                          <button
-                            className="btn btn-success"
-                            type="button"
-                            id="button-addon2"
-                          >
+                          <input type="text" className="form-control siplaceholder" placeholder="C A R I K A M P U S" aria-describedby="button-addon2"></input>
+                          <button className="btn btn-success" type="button" id="button-addon2">
                             Cari
                           </button>
                         </div>
                         <div className="sisapcesubjudul">
-                          <h5>
-                            "We will never know the real answer, before you try"
-                          </h5>
+                          <h5>"We will never know the real answer, before you try"</h5>
                         </div>
                       </center>
                     </div>
