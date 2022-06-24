@@ -5,6 +5,12 @@ import ListKampus from "./ListKampus";
 const Pencarian = () => {
   const [cari, setcari] = useState("");
   const kirim = cari;
+  const token = localStorage.getItem("token");
+  if (token === null) {
+    console.log("token null");
+  } else {
+    console.log("token not null");
+  }
 
   return (
     <>
@@ -36,11 +42,17 @@ const Pencarian = () => {
                 Cari
               </button>
             </div>
-            <center>
-              <a href="/Kampus/create" className="btn btn-warning">
-                <b>Tidak menemukan? Tambah disini</b>
-              </a>
-            </center>
+            {token ? (
+              <center>
+                <a href="/Kampus/create" className="btn btn-warning">
+                  <b>Tidak menemukan? Tambah disini</b>
+                </a>
+              </center>
+            ) : (
+              <center>
+                <p>Kamu dapat cari melalui kata kunci yang kamu inginkan</p>
+              </center>
+            )}
           </div>
           <div class="col-md-6">
             <center>
