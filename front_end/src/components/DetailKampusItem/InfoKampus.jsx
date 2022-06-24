@@ -1,6 +1,5 @@
 import Logo from "./image/KM.png";
 import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -9,6 +8,11 @@ import { useEffect } from "react";
 const InfoKampus = () => {
   const baseUrl = "https://reqres.in";
   const token = localStorage.getItem("token");
+  if (token === null) {
+    console.log("token null");
+  } else {
+    console.log("token not null");
+  }
 
   const { id } = useParams();
 
@@ -61,14 +65,21 @@ const InfoKampus = () => {
                     <p>
                       <b>Jurusan : </b> {data.email}
                     </p>
-                    <button className="btn btn-success  w-100  ">
-                      <a
-                        className="btn text-light"
-                        href={`/Kampus/detail/review/${data.id}`}
-                      >
-                        <b>R e v i e w</b>
-                      </a>
-                    </button>
+                    {token ? (
+                      <button className="btn btn-success  w-100  ">
+                        <a
+                          className="btn text-light"
+                          href={`/Kampus/detail/review/${data.id}`}
+                        >
+                          <b>R e v i e w</b>
+                        </a>
+                      </button>
+                    ) : (
+                      <p className="bg-success text-light p-1  w-100">
+                        <center>Lihat review dibawah ini</center>
+                      </p>
+                    )}
+
                     <div class="container">
                       {data2.map((item) => {
                         return (
