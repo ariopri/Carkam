@@ -8,6 +8,12 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
+type RegisterRequest struct {
+	Username string `json:"username"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
 type User struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
@@ -35,6 +41,23 @@ var jwtKey = []byte("key")
 type Claims struct {
 	Username string
 	jwt.StandardClaims
+}
+
+func (api *API) register(w http.ResponseWriter, r *http.Request) {
+	var req RegisterRequest
+	err := json.NewDecoder(r.Body).Decode(&req)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	err = api.usersRepo.InsertUser(req.Username, req.Email, req.Password)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	json.NewEncoder(w).Encode(RegisterSuccessResponse{Message: "Berhasil di tambahkan"})
 }
 
 func (api *API) login(w http.ResponseWriter, req *http.Request) {
@@ -105,5 +128,5 @@ func (api *API) logout(w http.ResponseWriter, req *http.Request) {
 	http.SetCookie(w, &c)
 
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("logged out"))
+	w.Write([]byte("SUKSES LOGOUT"))
 }
