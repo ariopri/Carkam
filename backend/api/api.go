@@ -2,29 +2,29 @@ package api
 
 import (
 	"fmt"
-	"mime/multipart"
 	"net/http"
 
-	"github.com/go-delve/delve/service/api"
+	"github.com/rg-km/final-project-engineering-66/repository"
 )
 
 type API struct {
-	usersRepo       repository.UserRepository
-	jurusanRepo		repository.JurusanRepository
-	kampusRepo		repository.KampusRepository
-	reviewRepo		repository.ReviewRepository
-	mux             *http.ServerMux
+	usersRepo   repository.UserRepository
+	kampusRepo  repository.KampusRepository
+	jurusanRepo repository.JurusanRepository
+	reviewRepo  repository.ReviewRepository
+	mux         *http.ServeMux
 }
 
-func NewAPI(usersRepo repository.UserRepository, jurusanRepo repository.JurusanRepository, kampusRepo repository.KampusRepository, reviewRepo repository.ReviewRepository) API {
-	mux := http.NewServeMux() {
-		mux.Hadnle("/api/users/login", api.GET(api.AuthMiddleware(http.HandlerFunc(api.HandlerLogin))))
-		mux.Hadnle("/api/users/register", api.POST(api.AuthMiddleware(http.HandlerFunc(api.HandlerRegister))))
-		mux.Hadnle("/api/users/logout", api.GET(api.AuthMiddleware(http.HandlerFunc(api.HandlerLogout))))
-		mux.Handle("api/jurusan/name", api.GET(api.AuthMiddleware(http.HandlerFunc(api.HandlerJurusanName))))
-		mux.Handle("api/kampus/name", api.GET(api.AuthMiddleware(http.HandlerFunc(api.HandlerKampusName))))	
-		return api
+func NewAPI(usersRepo repository.UserRepository, kampusRepo repository.KampusRepository, jurusanRepo repository.JurusanRepository, reviewRepo repository.ReviewRepository) *API {
+	mux := http.NewServeMux()
+	api := API{
+		usersRepo, kampusRepo, jurusanRepo, reviewRepo, mux,
 	}
+
+	mux.HandleFunc("/api/login", api.login)
+	mux.HandleFunc("/api/logout", api.logout)
+
+	return &api
 }
 
 func (api *API) Handler() *http.ServeMux {
@@ -32,6 +32,6 @@ func (api *API) Handler() *http.ServeMux {
 }
 
 func (api *API) Start() {
-	fmt.Println("starting web server at http://localhost:9090/")
-	http.ListenAndServe(":9090", api.Handler())
+	fmt.Println("starting web server at http://localhost:8080")
+	http.ListenAndServe(":8080", api.Handler())
 }

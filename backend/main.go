@@ -1,18 +1,23 @@
 package main
 
 import (
-	"github.com/rg-km/final-project-engineering-66/api"
+	"database/sql"
 
-	"github.com/ariopri/rg-km/final-project-engineering-66/db"
-	"github.com/ariopri/rg-km/final-project-engineering-66/repository"
+	"github.com/rg-km/final-project-engineering-66/api"
+	"github.com/rg-km/final-project-engineering-66/repository"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-	db := &db.CsvDB{}
+	db, err := sql.Open("sqlite3", "./db.sqlite")
+	if err != nil {
+		panic(err)
+	}
 	usersRepo := repository.NewUserRepository(db)
 	jurusanRepo := repository.NewJurusanRepository(db)
 	kampusRepo := repository.NewKampusRepository(db)
 	reviewRepo := repository.NewReviewRepository(db)
-	api := api.NewAPI(usersRepo, jurusanRepo, kampusRepo, reviewRepo)
+	api := api.NewAPI(*usersRepo, *kampusRepo, *jurusanRepo, *reviewRepo)
 	api.Start()
 }
