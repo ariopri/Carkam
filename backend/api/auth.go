@@ -1,197 +1,109 @@
 package api
 
 import (
-	"context"
 	"encoding/json"
-	"fmt"
-	"io/ioutil"
 	"net/http"
-	"path/filepath"
-	"strings"
 	"time"
 
-	jwt "github.com/golang-jwt/jwt/v4"
-	gubrak "github.com/novalagung/gubrak/v2"
+	"github.com/dgrijalva/jwt-go"
 )
 
-type CustomMux struct {
-	http.ServeMux
-	middlewares []func(next http.Handler) http.Handler
+type User struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
-func (c *CustomMux) RegisterMiddleware(next func(next http.Handler) http.Handler) {
-	c.middlewares = append(c.middlewares, next)
+type RegisterSuccessResponse struct {
+	Message string `json:"message"`
 }
 
-func (c *CustomMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	var current http.Handler = &c.ServeMux
-
-	for _, next := range c.middlewares {
-		current = next(current)
-	}
-
-	current.ServeHTTP(w, r)
+type LoginSuccessResponse struct {
+	Username string `json:"username"`
+	Token    string `json:"token"`
 }
 
-type M map[string]interface{}
+type LogoutSuccessResponse struct {
+	Message string `json:"message"`
+}
 
-type MyClaims struct {
+type AuthErrorResponse struct {
+	Error string `json:"error"`
+}
+
+var jwtKey = []byte("key")
+
+type Claims struct {
+	Username string
 	jwt.StandardClaims
-	Username string `json:"Username"`
-	Email    string `json:"Email"`
 }
 
-var APPLICATION_NAME = "Simple JWT App"
-var LOGIN_EXPIRATION_DURATION = time.Duration(1) * time.Hour
-var JWT_SIGNING_METHOD = jwt.SigningMethodHS256
-var JWT_SIGNATURE_KEY = []byte("the secret of camp2022")
-
-func main() {
-	mux := new(CustomMux)
-	mux.RegisterMiddleware(MiddlewareJWTAuthorization) // /dashboard -> MiddlewareJWTAuthorization -> HandlerDashboard
-
-	mux.HandleFunc("/register", HandlerRegister)
-	mux.HandleFunc("/login", HandlerLogin)
-	mux.HandleFunc("/logout", HandlerLogout)
-
-	server := new(http.Server)
-	server.Handler = mux
-	server.Addr = ":9090"
-
-	fmt.Println("Starting server at", server.Addr)
-	server.ListenAndServe()
-}
-
-func HandlerRegister(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
-		http.Error(w, "Unsupported http method", http.StatusBadRequest)
+func (api *API) login(w http.ResponseWriter, req *http.Request) {
+	api.AllowOrigin(w, req)
+	var user User
+	err := json.NewDecoder(req.Body).Decode(&user)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-}
+	res, err := api.usersRepo.Login(user.Username, user.Password)
 
-func HandlerLogin(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
-		http.Error(w, "Unsupported http method", http.StatusBadRequest)
+	w.Header().Set("Content-Type", "application/json")
+	if err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		json.NewEncoder(w).Encode(AuthErrorResponse{Error: "Login Failed"})
 		return
 	}
+	expirationTime := time.Now().Add(60 * time.Minute)
 
-	// Basic validation
-	username, password, ok := r.BasicAuth()
-	if !ok {
-		http.Error(w, "Invalid username or password basic", http.StatusBadRequest)
-		return
-	}
-
-	// Authenticate user
-	ok, userInfo := authenticateUser(username, password)
-	if !ok {
-		http.Error(w, "Invalid username or password data users.json", http.StatusBadRequest)
-		return
-	}
-
-	claims := MyClaims{
+	claims := &Claims{
+		Username: *res,
 		StandardClaims: jwt.StandardClaims{
-			Issuer:    APPLICATION_NAME,
-			ExpiresAt: time.Now().Add(LOGIN_EXPIRATION_DURATION).Unix(),
+			ExpiresAt: expirationTime.Unix(),
 		},
-		Username: userInfo["username"].(string),
-		Email:    userInfo["email"].(string),
 	}
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
-	token := jwt.NewWithClaims(
-		JWT_SIGNING_METHOD,
-		claims,
-	)
+	tokenString, err := token.SignedString(jwtKey)
 
-	signedToken, err := token.SignedString(JWT_SIGNATURE_KEY)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
-	tokenString, _ := json.Marshal(M{"token": signedToken})
-	w.Write([]byte(tokenString))
-}
-
-func HandlerLogout(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
-		http.Error(w, "Unsupported http method", http.StatusBadRequest)
-		return
-	}
-	w.Write([]byte("Logout success"))
-}
-
-func authenticateUser(username, password string) (bool, M) {
-	dbPath, err := filepath.Abs("./data/users.json")
-	if err != nil {
-		return false, nil
-	}
-
-	buf, _ := ioutil.ReadFile(dbPath)
-
-	data := make([]M, 0)
-	errUnmarshal := json.Unmarshal(buf, &data)
-	if errUnmarshal != nil {
-		return false, nil
-	}
-
-	res := gubrak.From(data).Find(func(each M) bool {
-		return each["username"] == username && each["password"] == password
-	}).Result()
-
-	if res != nil {
-		resM := res.(M)
-		delete(resM, "password")
-		return true, resM
-	}
-
-	return false, nil
-}
-
-func MiddlewareJWTAuthorization(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-
-		if r.URL.Path == "/login" {
-			next.ServeHTTP(w, r)
-			return
-		}
-
-		authorizationHeader := r.Header.Get("Authorization") // -H "Authorization: Bearer ...."
-		if !strings.Contains(authorizationHeader, "Bearer") {
-			http.Error(w, "Invalid token", http.StatusBadRequest)
-			return
-		}
-
-		tokenString := strings.Replace(authorizationHeader, "Bearer ", "", -1) // ....
-
-		token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-			if method, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-				return nil, fmt.Errorf("signing method invalid")
-			} else if method != JWT_SIGNING_METHOD {
-				return nil, fmt.Errorf("signing method invalid")
-			}
-
-			return JWT_SIGNATURE_KEY, nil
-		})
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-
-		claims, ok := token.Claims.(jwt.MapClaims)
-		if !ok || !token.Valid {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-
-		ctx := context.WithValue(context.Background(), "userInfo", claims)
-		r = r.WithContext(ctx)
-
-		next.ServeHTTP(w, r)
+	http.SetCookie(w, &http.Cookie{
+		Name:    "token",
+		Value:   tokenString,
+		Expires: expirationTime,
+		Path:    "/",
 	})
+	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: *res, Token: tokenString})
 }
 
-// curl -X POST --user aditira:aditira123 http://localhost:8080/login
-// {"token":"xxxxxx.yyyyyy.zzzzzzz"}
+func (api *API) logout(w http.ResponseWriter, req *http.Request) {
+	api.AllowOrigin(w, req)
 
-// curl -X GET --header "Authorization: Bearer xxxxxx.yyyyyy.zzzzzzz" http://localhost:8080/dashboard
+	token, err := req.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			// return unauthorized ketika token kosong
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		// return bad request ketika field token tidak ada
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	if token.Value == "" {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+
+	c := http.Cookie{
+		Name:   "token",
+		MaxAge: -1,
+	}
+	http.SetCookie(w, &c)
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("logged out"))
+}
