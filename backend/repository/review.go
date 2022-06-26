@@ -1,6 +1,8 @@
 package repository
 
-import "database/sql"
+import (
+	"database/sql"
+)
 
 type ReviewRepository struct {
 	db *sql.DB
@@ -84,7 +86,7 @@ func (r *ReviewRepository) FetchReviewByUserID(UserID int64) ([]*Review, error) 
 func (r *ReviewRepository) FetchReviewByIsian(Isian string) ([]*Review, error) {
 	var review []*Review
 	query := `
-		SELECT * FROM review WHERE isian = ? 
+		SELECT id, id_user, id_kampus, id_jurusan, isian FROM review WHERE isian = ? 
 	`
 	rows, err := r.db.Query(query, Isian)
 	if err != nil {
@@ -101,4 +103,24 @@ func (r *ReviewRepository) FetchReviewByIsian(Isian string) ([]*Review, error) {
 		review = append(review, &reviewTemp)
 	}
 	return review, nil
+}
+
+func (r *ReviewRepository) InsertReview(name string, email string) error {
+
+	_, err := r.db.Exec("INSERT INTO review (name string, email string) VALUES (?, ?)", name, email)
+	if err != nil {
+		return err
+	}
+	return nil
+
+}
+
+func (r *ReviewRepository) InsertcreatReview(isian string) error {
+
+	_, err := r.db.Exec("INSERT INTO kampus (isian string) VALUES (?)", isian)
+	if err != nil {
+		return err
+	}
+	return nil
+
 }
