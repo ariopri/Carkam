@@ -13,10 +13,12 @@ const Register = () => {
   const [email, setemail] = useState("");
   const [pass, setpass] = useState("");
   const [pass2, setpass2] = useState("");
+  const username = name;
   const register = async () => {
     if (pass === pass2) {
       const password = pass;
       const user = {
+        // username,
         email,
         password,
       };
