@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 
 	"github.com/rg-km/final-project-engineering-66/api"
 	"github.com/rg-km/final-project-engineering-66/repository"
@@ -11,7 +10,7 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("sqlite3", "./carkam.db")
+	db, err := sql.Open("sqlite3", "./carkams.db")
 	if err != nil {
 		panic(err)
 	}
@@ -19,7 +18,7 @@ func main() {
 	jurusanRepo := repository.NewJurusanRepository(db)
 	kampusRepo := repository.NewKampusRepository(db)
 	reviewRepo := repository.NewReviewRepository(db)
-	fmt.Println("starting web server at http://localhost:8080")
+
 	api := api.NewAPI(*usersRepo, *kampusRepo, *jurusanRepo, *reviewRepo)
 	api.Start()
 }
