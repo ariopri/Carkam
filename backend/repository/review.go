@@ -9,11 +9,11 @@ type ReviewRepository struct {
 }
 
 type Review struct {
-	ID        int64  `json:"id"`
-	IdUSer    int64  `json:"id_user"`
-	IdKampus  int64  `json:"id_kampus"`
-	IdJurusan int64  `json:"id_jurusan"`
-	Isian     string `json:"isian"`
+	ID          int64  `json:"id"`
+	Username    string `json:"username"`
+	KampusName  string `json:"kampus_name"`
+	JurusanName string `json:"jurusan_name"`
+	Isian       string `json:"isian"`
 }
 
 func NewReviewRepository(db *sql.DB) *ReviewRepository {
@@ -23,7 +23,7 @@ func NewReviewRepository(db *sql.DB) *ReviewRepository {
 func (r *ReviewRepository) FetchReviewByID(id int64) ([]*Review, error) {
 	var review []*Review
 	query := `
-		SELECT id, id_user, id_kampus, id_jurusan, isian FROM review WHERE id = ?
+		SELECT id, username, kampus_name, jurusan_name, isian FROM review WHERE id = ?
 	`
 	rows, err := r.db.Query(query, id)
 	if err != nil {
@@ -32,7 +32,7 @@ func (r *ReviewRepository) FetchReviewByID(id int64) ([]*Review, error) {
 	defer rows.Close()
 	for rows.Next() {
 		var reviewTemp Review
-		err := rows.Scan(&reviewTemp.ID, &reviewTemp.IdUSer, &reviewTemp.IdKampus, &reviewTemp.IdJurusan, &reviewTemp.Isian)
+		err := rows.Scan(&reviewTemp.ID, &reviewTemp.Username, &reviewTemp.KampusName, &reviewTemp.JurusanName, &reviewTemp.Isian)
 		if err != nil {
 			return nil, err
 		}
@@ -44,7 +44,7 @@ func (r *ReviewRepository) FetchReviewByID(id int64) ([]*Review, error) {
 func (r *ReviewRepository) FetchReviewByKampusID(Kampus string) ([]*Review, error) {
 	var review []*Review
 	query := `
-	select table review from review where id_kampus = ?
+	SELECT id, username, kampus_name, jurusan_name, isian FROM review WHERE id = ?
 	`
 	rows, err := r.db.Query(query, Kampus)
 	if err != nil {
@@ -53,7 +53,7 @@ func (r *ReviewRepository) FetchReviewByKampusID(Kampus string) ([]*Review, erro
 	defer rows.Close()
 	for rows.Next() {
 		var reviewTemp Review
-		err := rows.Scan(&reviewTemp.ID, &reviewTemp.IdUSer, &reviewTemp.IdKampus, &reviewTemp.IdJurusan, &reviewTemp.Isian)
+		err := rows.Scan(&reviewTemp.ID, &reviewTemp.Username, &reviewTemp.KampusName, &reviewTemp.JurusanName, &reviewTemp.Isian)
 		if err != nil {
 			return nil, err
 		}
@@ -65,7 +65,7 @@ func (r *ReviewRepository) FetchReviewByKampusID(Kampus string) ([]*Review, erro
 func (r *ReviewRepository) FetchReviewByUserID(UserID int64) ([]*Review, error) {
 	var review []*Review
 	query := `
-		SELECT * FROM review WHERE id_user = ?
+		SELECT id, username, kampus_name, jurusan_name, isian FROM review WHERE id = ?
 	`
 	rows, err := r.db.Query(query, UserID)
 	if err != nil {
@@ -74,7 +74,7 @@ func (r *ReviewRepository) FetchReviewByUserID(UserID int64) ([]*Review, error) 
 	defer rows.Close()
 	for rows.Next() {
 		var reviewTemp Review
-		err := rows.Scan(&reviewTemp.ID, &reviewTemp.IdUSer, &reviewTemp.IdKampus, &reviewTemp.IdJurusan, &reviewTemp.Isian)
+		err := rows.Scan(&reviewTemp.ID, &reviewTemp.Username, &reviewTemp.KampusName, &reviewTemp.JurusanName, &reviewTemp.Isian)
 		if err != nil {
 			return nil, err
 		}
@@ -86,7 +86,7 @@ func (r *ReviewRepository) FetchReviewByUserID(UserID int64) ([]*Review, error) 
 func (r *ReviewRepository) FetchReviewByIsian(Isian string) ([]*Review, error) {
 	var review []*Review
 	query := `
-		SELECT id, id_user, id_kampus, id_jurusan, isian FROM review WHERE isian = ? 
+		SELECT id, username, kampus_name, jurusan_name, isian FROM review WHERE id = ?
 	`
 	rows, err := r.db.Query(query, Isian)
 	if err != nil {
@@ -96,7 +96,7 @@ func (r *ReviewRepository) FetchReviewByIsian(Isian string) ([]*Review, error) {
 	for rows.Next() {
 		var reviewTemp Review
 		//review
-		err := rows.Scan(&reviewTemp.ID, &reviewTemp.IdUSer, &reviewTemp.IdKampus, &reviewTemp.IdJurusan, &reviewTemp.Isian)
+		err := rows.Scan(&reviewTemp.ID, &reviewTemp.Username, &reviewTemp.KampusName, &reviewTemp.JurusanName, &reviewTemp.Isian)
 		if err != nil {
 			return nil, err
 		}
@@ -105,9 +105,9 @@ func (r *ReviewRepository) FetchReviewByIsian(Isian string) ([]*Review, error) {
 	return review, nil
 }
 
-func (r *ReviewRepository) InsertReview(name string, email string) error {
+func (r *ReviewRepository) InsertReview(username string, kampus_name string, jurusan_name string) error {
 
-	_, err := r.db.Exec("INSERT INTO review (name string, email string) VALUES (?, ?)", name, email)
+	_, err := r.db.Exec("INSERT INTO review (username string, kampus_name string, jurusan_name string) VALUES (?, ?, ?)", username, kampus_name, jurusan_name)
 	if err != nil {
 		return err
 	}

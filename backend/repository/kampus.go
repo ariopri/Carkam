@@ -60,29 +60,9 @@ func (k *KampusRepository) FetchKampusByName(name string) ([]*Kampus, error) {
 	return kampus, nil
 }
 
-// func (k *KampusRepository) InsertKampus (kampus *Kampus) error {
-// 	query := `
-// 		INSERT INTO kampus (name, email, jurusan1, jurusan2) VALUES (?, ?, ?, ?)
-// 	`
-// 	rows, err := k.db.Query(query, kampus.Name, kampus.Email, kampus.Jurusan1, kampus.Jurusan2)
-// 	if err != nil {
-// 		return err
-// 	}
-// 	defer rows.Close()
-// 	for rows.Next() {
-// 		var kampusTemp Kampus
-// 		err := rows.Scan(&kampusTemp.Id, &kampusTemp.Name, &kampusTemp.Email, &kampusTemp.Jurusan1, &kampusTemp.Jurusan2)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		kampus = append(kampus, &kampusTemp)
-// 	}
-// 	return nil
-// }
+func (u *KampusRepository) InsertKampus(name string, email string, jurusan1 string, jurusan2 string) error {
 
-func (u *KampusRepository) InsertKampus(name string, email string) error {
-
-	_, err := u.db.Exec("INSERT INTO kampus (name string, email string) VALUES (?, ?)", name, email)
+	_, err := u.db.Exec("INSERT INTO kampus (name string, email string,jurusan1 string, jurusan2 string) VALUES (?, ?, ?, ?)", name, email, jurusan1, jurusan2)
 	if err != nil {
 		return err
 	}

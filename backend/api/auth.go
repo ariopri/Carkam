@@ -9,8 +9,10 @@ import (
 )
 
 type KampusSuccsesRequest struct {
-	Name  string `json:"name"`
-	Email string `json:"email"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Jurusan1 string `json:"jurusan1"`
+	Jurusan2 string `json:"jurusan2"`
 }
 
 type KampusSucssesResponse struct {
@@ -18,8 +20,9 @@ type KampusSucssesResponse struct {
 }
 
 type Review struct {
-	Name  string `json:"name"`
-	Email string `json:"email"`
+	Username    string `json:"username"`
+	KampusName  string `json:"kampus_name"`
+	JurusanName string `json:"jurusan_name"`
 }
 
 type CreatereviewRequest struct {
@@ -89,7 +92,7 @@ func (api *API) review(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	err = api.reviewRepo.InsertReview(req.Name, req.Email)
+	err = api.reviewRepo.InsertReview(req.Username, req.KampusName, req.JurusanName)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
@@ -105,7 +108,7 @@ func (api *API) kampus(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	err = api.kampusRepo.InsertKampus(req.Name, req.Email)
+	err = api.kampusRepo.InsertKampus(req.Name, req.Email, req.Jurusan1, req.Jurusan2)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
