@@ -28,17 +28,16 @@ func main() {
 		CREATE TABLE IF NOT EXISTS jurusan (
 			id integer not null primary key AUTOINCREMENT,
 			name varchar(255) not null,
-			id_kampus integer not null
 		);
 		CREATE TABLE IF NOT EXISTS review (
 			id integer not null primary key AUTOINCREMENT,
-			id_user integer not null,
-			id_kampus integer not null,
-			id_jurusan integer not null,
-			isian longtext not null
+			username varchar(255) not null,
+			kampus_name strnig not null,
+			jurusan_name string not null,
+			isian varhar(255) not null
 		);
 		Insert into users (username, email, password) values ("user","user","user" );
-		Insert into kampus (name, email, jurusan1, jurusan2) values ("Universitas Indonesa", "humas-ui@ui.ac.id", "Ilmu Komputer", "Pendidikan Dokter"),
+		Insert into kampus (name, email, jurusan1, jurusan2) values ("Universitas Indonesia", "humas-ui@ui.ac.id", "Ilmu Komputer", "Pendidikan Dokter"),
 		("Institut Teknologi Bandung", "info-center@itb.ac.id", "Teknik Informatika", "Teknik Elektro"),
 		("Universitas Gadjah" , "info@ugm.ac.id", "Ilmu Komputer", "Teknik Nuklir"), 
 		("Universitas Padjajaran", "humas@unpad.ac.id", "Psikologi", "Pendidikan Dokter"),
@@ -48,10 +47,10 @@ func main() {
 		("Universitas Negeri Yogyakarta", "humas@uny.ac.id", "Teknik Sipil", "Teknik Elektro"),
 		("Universitas Negeri Jakarta", "humas@unj.ac.id", "Matematika", "Statistika"),
 		("Universitas Pendidikan Indonesia", "sekuniv_upi@upi.edu", "Teknik Elektro", "Teknik Sipil");
-		Insert into review (id_user, id_kampus, id_jurusan, isian) values ("1", 1, 1, "isi");
+
+		Insert into review (username, kampus_name, jurusan_name, isian) values ("user", "Universitas Indonesia", "Ilmu Komputer", "Isian");
 	`)
 	if err != nil {
 		panic(err)
 	}
-
 }
