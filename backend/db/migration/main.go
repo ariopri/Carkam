@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("sqlite3", "../../carkams.db")
+	db, err := sql.Open("sqlite3", "../../CARKAMD.db")
 	if err != nil {
 		panic(err)
 	}
@@ -27,13 +27,13 @@ func main() {
 		);	
 		CREATE TABLE IF NOT EXISTS jurusan (
 			id integer not null primary key AUTOINCREMENT,
-			name varchar(255) not null,
+			name varchar(255) not null
 		);
 		CREATE TABLE IF NOT EXISTS review (
 			id integer not null primary key AUTOINCREMENT,
 			username varchar(255) not null,
-			kampus_name strnig not null,
-			jurusan_name string not null,
+			kampus_name varhar(255) not null,
+			jurusan_name varchar(255) not null,
 			isian varhar(255) not null
 		);
 		Insert into users (username, email, password) values ("user","user","user" );
@@ -47,8 +47,8 @@ func main() {
 		("Universitas Negeri Yogyakarta", "humas@uny.ac.id", "Teknik Sipil", "Teknik Elektro"),
 		("Universitas Negeri Jakarta", "humas@unj.ac.id", "Matematika", "Statistika"),
 		("Universitas Pendidikan Indonesia", "sekuniv_upi@upi.edu", "Teknik Elektro", "Teknik Sipil");
-
-		Insert into review (username, kampus_name, jurusan_name, isian) values ("user", "Universitas Indonesia", "Ilmu Komputer", "Isian");
+		Insert into jurusan (name) values ("Ilmu Komputer");
+		Insert into review (username, kampus_name, jurusan_name, isian) values ("user", "Universitas Indonesia", "Ilmu Komputer", "isian");
 	`)
 	if err != nil {
 		panic(err)
