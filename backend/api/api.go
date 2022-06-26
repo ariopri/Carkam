@@ -36,6 +36,6 @@ func (api *API) Handler() *http.ServeMux {
 }
 
 func (api *API) Start() {
-	fmt.Println("starting web server at http://localhost:8080")
+	fmt.Println("starting web server at http://localhost:8081")
 	http.ListenAndServe(":8081", api.Handler())
 }
