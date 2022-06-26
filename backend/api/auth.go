@@ -25,6 +25,10 @@ type Review struct {
 	JurusanName string `json:"jurusan_name"`
 }
 
+type ReviewSuccsesResponse struct {
+	Message string `json:"message"`
+}
+
 type CreatereviewRequest struct {
 	Isian string `json:"isian"`
 }
@@ -97,7 +101,7 @@ func (api *API) review(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	json.NewEncoder(w).Encode(CreatereviewResponse{Message: "Berhasil di tambahkan"})
+	json.NewEncoder(w).Encode(ReviewSuccsesResponse{Message: "Berhasil di tambahkan"})
 }
 
 func (api *API) kampus(w http.ResponseWriter, r *http.Request) {
