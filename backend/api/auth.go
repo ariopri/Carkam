@@ -8,6 +8,28 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
+type KampusSuccsesRequest struct {
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
+type KampusSucssesResponse struct {
+	Message string `json:"message"`
+}
+
+type Review struct {
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
+type CreatereviewRequest struct {
+	Isian string `json:"isian"`
+}
+
+type CreatereviewResponse struct {
+	Message string `json:"message"`
+}
+
 type RegisterRequest struct {
 	Username string `json:"username"`
 	Email    string `json:"email"`
@@ -41,6 +63,54 @@ var jwtKey = []byte("key")
 type Claims struct {
 	Username string
 	jwt.StandardClaims
+}
+
+func (api *API) createreview(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+	var req CreatereviewRequest
+	err := json.NewDecoder(r.Body).Decode(&req)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	err = api.reviewRepo.InsertcreatReview(req.Isian)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	json.NewEncoder(w).Encode(CreatereviewResponse{Message: "Berhasil di tambahkan"})
+}
+
+func (api *API) review(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+	var req Review
+	err := json.NewDecoder(r.Body).Decode(&req)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	err = api.reviewRepo.InsertReview(req.Name, req.Email)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	json.NewEncoder(w).Encode(CreatereviewResponse{Message: "Berhasil di tambahkan"})
+}
+
+func (api *API) kampus(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+	var req KampusSuccsesRequest
+	err := json.NewDecoder(r.Body).Decode(&req)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	err = api.kampusRepo.InsertKampus(req.Name, req.Email)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	json.NewEncoder(w).Encode(KampusSucssesResponse{Message: "Berhasil di tambahkan"})
 }
 
 func (api *API) register(w http.ResponseWriter, r *http.Request) {
