@@ -9,12 +9,11 @@ import axios from "axios";
 function Login() {
   const navigate = useNavigate();
   const baseUrl = "https://reqres.in";
-  const [emailval, setemailval] = useState("");
-  const [passval, setpassval] = useState("");
-  const [error, seterror] = useState("");
+  const [username, setusername] = useState("");
+  const [password, setpassword] = useState("");
   const [isError, setisError] = useState(false);
-  const email = emailval;
-  const password = passval;
+  const [error, seterror] = useState("");
+  const email = username;
   const userlogin = async () => {
     const user = {
       email,
@@ -23,11 +22,13 @@ function Login() {
     try {
       const res = await axios.post(`${baseUrl}/api/login`, user);
       localStorage.setItem("token", res.data.token);
-      setemailval("");
-      setpassval("");
+      setusername("");
+      setpassword("");
       navigate("/Kampus");
+      console.log(res.data);
     } catch (err) {
       seterror(err.response.data.message);
+      console.log(error);
       setisError(true);
     }
   };
@@ -43,25 +44,21 @@ function Login() {
                   <img src={logo} id="img-id" alt="" srcSet="" />
                 </div>
                 <form>
-                  <label>Email</label>
+                  <label>Username</label>
                   <input
-                    placeholder="Enter your email"
-                    type="email"
-                    name={emailval}
+                    placeholder="Enter your username"
+                    type="text"
                     onChange={(e) => {
-                      setemailval(e.target.value);
+                      setusername(e.target.value);
                     }}
-                    id="emil1"
                   />
                   <label>Password</label>
                   <input
                     placeholder="Enter your password"
                     type="password"
-                    name={passval}
                     onChange={(e) => {
-                      setpassval(e.target.value);
+                      setpassword(e.target.value);
                     }}
-                    id="pwd1"
                   />
                   <button
                     type="button"
