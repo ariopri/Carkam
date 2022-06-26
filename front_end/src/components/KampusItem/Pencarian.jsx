@@ -1,10 +1,12 @@
 import Systemnya from "./image/FAQ-Vector.png";
-import { useState } from "react";
 import ListKampus from "./ListKampus";
+import useStore from "./Store";
 
 const Pencarian = () => {
-  const [cari, setcari] = useState("");
+  const setCari = useStore((state) => state.setCari);
+  const cari = useStore((state) => state.cari);
   const kirim = cari;
+
   const token = localStorage.getItem("token");
   if (token === null) {
     console.log("token null");
@@ -31,7 +33,7 @@ const Pencarian = () => {
                 placeholder="C A R I K A M P U S"
                 aria-describedby="button-addon2"
                 onChange={(e) => {
-                  setcari(e.target.value);
+                  setCari(e.target.value);
                 }}
               ></input>
               <button
