@@ -1,34 +1,18 @@
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import InfoKampus from "../DetailKampusItem/InfoKampus";
 import KM from "./image/KM.png";
-import axios from "axios";
 import { useEffect } from "react";
-import { useState } from "react";
+import useStore from "./Store";
 
 const ListKampus = (props) => {
   const dapat = props.cari;
-  const baseUrl = "https://reqres.in";
-  const token = localStorage.getItem("token");
 
-  const [data, setdata] = useState([]);
+  const data = useStore((state) => state.data);
+  const getdata = useStore((state) => state.getdata);
 
-  const getdata = async () => {
-    const res = await axios.get(`${baseUrl}/api/users`, {
-      headers: {
-        Authorization: token,
-      },
-    });
-    setdata(res.data.data);
-  };
   useEffect(() => {
     getdata();
   }, []);
-
-  const kiyimdata = data.filter((item) => {
-    return item.first_name.toLowerCase().includes(dapat.toLowerCase());
-    console.log(item.first_name);
-  });
 
   return (
     <>
