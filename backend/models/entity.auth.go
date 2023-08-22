@@ -6,7 +6,7 @@ type EntityUser struct {
 	ID        string
 	FirstName string
 	LastName  string
-	Username  string
+	UserName  string
 	Email     string
 	Password  string
 	CreatedAt time.Time

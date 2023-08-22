@@ -6,7 +6,7 @@ type EntityStudent struct {
 	ID        string
 	FirstName string
 	LastName  string
-	Username  string
+	UserName  string
 	Phone     string
 	Email     string
 	Password  string
