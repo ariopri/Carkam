@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c136afd-658f-4af2-9eb5-6aaaf05508bb" name="Changes" comment="update: update git ignore">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="6c136afd-658f-4af2-9eb5-6aaaf05508bb" name="Changes" comment="fix: fix typing">
+      <change afterPath="$PROJECT_DIR$/controllers/auth-controllers/login/input.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controllers/auth-controllers/register/input.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controllers/student-controllers/create/entity.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,6 +57,11 @@
     ]
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/controllers/auth-controllers/register" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
@@ -65,7 +72,9 @@
     <MESSAGE value="feat: create database using golang migrations" />
     <MESSAGE value="feat: create kampus and komentar entity" />
     <MESSAGE value="update: update git ignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="update: update git ignore" />
+    <MESSAGE value="feat: craete envirotment varible" />
+    <MESSAGE value="fix: fix typing" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: fix typing" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
