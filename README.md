@@ -1,2 +1,1 @@
-# Carkam
-Aplikasi web cari kampus Untuk mempermudah Siswa Mencari Detail Kampus yang dituju
+Server menggunakna Backend Golang dengan Framework Gin Gonic dan database Postgres
