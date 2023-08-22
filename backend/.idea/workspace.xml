@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c136afd-658f-4af2-9eb5-6aaaf05508bb" name="Changes" comment="feat: create kampus and komentar entity">
+    <list default="true" id="6c136afd-658f-4af2-9eb5-6aaaf05508bb" name="Changes" comment="update: update git ignore">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -64,7 +64,8 @@
     <MESSAGE value="feat: create user entity" />
     <MESSAGE value="feat: create database using golang migrations" />
     <MESSAGE value="feat: create kampus and komentar entity" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: create kampus and komentar entity" />
+    <MESSAGE value="update: update git ignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="update: update git ignore" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
