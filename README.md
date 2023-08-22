@@ -1,1 +1,2 @@
-Server menggunakna Backend Golang dengan Framework Gin Gonic dan database Postgres
+# Carkam
+Aplikasi web cari kampus Untuk mempermudah Siswa Mencari Detail Kampus yang dituju
