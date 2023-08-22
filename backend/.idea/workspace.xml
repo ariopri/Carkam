@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c136afd-658f-4af2-9eb5-6aaaf05508bb" name="Changes" comment="feat: add framework Gin Gonic and other libraries">
-      <change afterPath="$PROJECT_DIR$/models/entity.auth.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/entity.student.go" afterDir="false" />
+    <list default="true" id="6c136afd-658f-4af2-9eb5-6aaaf05508bb" name="Changes" comment="feat: create user entity">
+      <change afterPath="$PROJECT_DIR$/.idea/backend.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migration/main.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +58,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: add framework Gin Gonic and other libraries" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add framework Gin Gonic and other libraries" />
+    <MESSAGE value="feat: create user entity" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: create user entity" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
