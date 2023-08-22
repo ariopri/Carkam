@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c136afd-658f-4af2-9eb5-6aaaf05508bb" name="Changes" comment="feat: create database using golang migrations">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/entity.biaya.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/entity.fakultas.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/entity.jurusan.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/entity.kampus.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/entity.komentar.go" afterDir="false" />
+    <list default="true" id="6c136afd-658f-4af2-9eb5-6aaaf05508bb" name="Changes" comment="feat: create kampus and komentar entity">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +63,8 @@
     <MESSAGE value="feat: add framework Gin Gonic and other libraries" />
     <MESSAGE value="feat: create user entity" />
     <MESSAGE value="feat: create database using golang migrations" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: create database using golang migrations" />
+    <MESSAGE value="feat: create kampus and komentar entity" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: create kampus and komentar entity" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
