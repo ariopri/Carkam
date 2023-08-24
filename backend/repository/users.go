@@ -5,7 +5,7 @@ import (
 	"errors"
 )
 
-type UserRepository struct {
+type UsersRepository struct {
 	db *sql.DB
 }
 
