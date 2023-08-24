@@ -4,11 +4,20 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c136afd-658f-4af2-9eb5-6aaaf05508bb" name="Changes" comment="fix: fix typing">
-      <change afterPath="$PROJECT_DIR$/controllers/auth-controllers/login/input.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/auth-controllers/register/input.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/student-controllers/create/entity.go" afterDir="false" />
+    <list default="true" id="6c136afd-658f-4af2-9eb5-6aaaf05508bb" name="Changes" comment="feat: create controllers request for auth and student">
+      <change afterPath="$PROJECT_DIR$/models/domain/entity.biaya.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/domain/entity.fakultas.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/domain/entity.jurusan.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/domain/entity.kampus.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/domain/entity.komentar.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/entity.auth.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/entity.biaya.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/entity.fakultas.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/entity.jurusan.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/entity.kampus.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/entity.komentar.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/entity.student.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/domain/entity.user.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,33 +39,37 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2UIVywxoBFIU7jZ1Qi9IKSHk7Z8" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/ario/arioprima/ruang-guru/tugas_akhir_rg/Carkam/backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/home/ario/arioprima/ruang-guru/tugas_akhir_rg/Carkam/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/controllers/auth-controllers/register" />
@@ -67,6 +80,7 @@
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="feat: add framework Gin Gonic and other libraries" />
     <MESSAGE value="feat: create user entity" />
     <MESSAGE value="feat: create database using golang migrations" />
@@ -74,7 +88,8 @@
     <MESSAGE value="update: update git ignore" />
     <MESSAGE value="feat: craete envirotment varible" />
     <MESSAGE value="fix: fix typing" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: fix typing" />
+    <MESSAGE value="feat: create controllers request for auth and student" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: create controllers request for auth and student" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
