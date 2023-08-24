@@ -8,9 +8,9 @@ type EntityUser struct {
 	LastName  string
 	UserName  string
 	Email     string
-	Phone     *string
+	Phone     string
 	Password  string
-	Role      *string
+	Role      string
 	Kota      *string
 	Avatar    *string
 	CreatedAt time.Time
