@@ -4,20 +4,13 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c136afd-658f-4af2-9eb5-6aaaf05508bb" name="Changes" comment="feat: create controllers request for auth and student">
-      <change afterPath="$PROJECT_DIR$/models/domain/entity.biaya.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/domain/entity.fakultas.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/domain/entity.jurusan.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/domain/entity.kampus.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/domain/entity.komentar.go" afterDir="false" />
+    <list default="true" id="6c136afd-658f-4af2-9eb5-6aaaf05508bb" name="Changes" comment="update: update entity users">
+      <change afterPath="$PROJECT_DIR$/models/web/login_request.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/web/login_response.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/web/register_request.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/web/register_response.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/web/web_response.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/entity.auth.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/entity.biaya.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/entity.fakultas.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/entity.jurusan.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/entity.kampus.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/entity.komentar.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/entity.student.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/domain/entity.user.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +82,9 @@
     <MESSAGE value="feat: craete envirotment varible" />
     <MESSAGE value="fix: fix typing" />
     <MESSAGE value="feat: create controllers request for auth and student" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: create controllers request for auth and student" />
+    <MESSAGE value="update: change the directory position of an entity file" />
+    <MESSAGE value="update: update entity users" />
+    <option name="LAST_COMMIT_MESSAGE" value="update: update entity users" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
