@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c136afd-658f-4af2-9eb5-6aaaf05508bb" name="Changes" comment="update: update entity users">
-      <change afterPath="$PROJECT_DIR$/models/web/login_request.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/web/login_response.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/web/register_request.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/web/register_response.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/web/web_response.go" afterDir="false" />
+    <list default="true" id="6c136afd-658f-4af2-9eb5-6aaaf05508bb" name="Changes" comment="update: change package name">
+      <change afterPath="$PROJECT_DIR$/repository/user_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +82,10 @@
     <MESSAGE value="feat: create controllers request for auth and student" />
     <MESSAGE value="update: change the directory position of an entity file" />
     <MESSAGE value="update: update entity users" />
-    <option name="LAST_COMMIT_MESSAGE" value="update: update entity users" />
+    <MESSAGE value="feat: create requests and responses for user's login and register" />
+    <MESSAGE value="delete: deletes files and directories in the controllers folder" />
+    <MESSAGE value="update: change package name" />
+    <option name="LAST_COMMIT_MESSAGE" value="update: change package name" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
