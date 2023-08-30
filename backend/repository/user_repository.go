@@ -8,7 +8,7 @@ import (
 )
 
 type UserRepository interface {
-	Save(ctx context.Context, tx *sql.Tx, user domain.EntityUser) error
+	Save(ctx context.Context, tx *sql.Tx, user domain.EntityUser) (domain.EntityUser, error)
 	Update(ctx context.Context, tx *sql.Tx, user domain.EntityUser) (domain.EntityUser, error)
 	Delete(ctx context.Context, tx *sql.Tx, user domain.EntityUser)
 	FindByID(ctx context.Context, tx *sql.Tx, userId string) (domain.EntityUser, error)
@@ -25,20 +25,20 @@ func NewUsersRepository(db *sql.DB) UserRepository {
 	return &UserRepositoryImpl{DB: db}
 }
 
-func (repository *UserRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, user domain.EntityUser) error {
+func (repository *UserRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, user domain.EntityUser) (domain.EntityUser, error) {
 	//TODO implement method
 	var email, username string
 	var emailArr, usernameArr []string
 
 	rowsCheck, err := tx.QueryContext(ctx, "SELECT email, username FROM users")
 	if err != nil {
-		return err
+		return domain.EntityUser{}, err
 	}
 
 	for rowsCheck.Next() {
 		err := rowsCheck.Scan(&email, &username)
 		if err != nil {
-			return err
+			return domain.EntityUser{}, err
 		}
 		emailArr = append(emailArr, email)
 		usernameArr = append(usernameArr, username)
@@ -46,13 +46,13 @@ func (repository *UserRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, user
 
 	for _, v := range emailArr {
 		if v == user.Email {
-			return errors.New("email already exist")
+			return domain.EntityUser{}, errors.New("email already exist")
 		}
 	}
 
 	for _, v := range usernameArr {
 		if v == user.UserName {
-			return errors.New("username already exist")
+			return domain.EntityUser{}, errors.New("username already exist")
 		}
 	}
 	SQL := "INSERT INTO users (firstname, lastname, username, email, phone, password, created_at, update_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)"
@@ -70,10 +70,10 @@ func (repository *UserRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, user
 	)
 
 	if err != nil {
-		return err
+		return domain.EntityUser{}, err
 	}
 
-	return nil
+	return user, nil
 }
 
 func (repository *UserRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, user domain.EntityUser) (domain.EntityUser, error) {
