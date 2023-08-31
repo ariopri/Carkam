@@ -3,6 +3,8 @@ package service
 import (
 	"context"
 	"database/sql"
+	"time"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/rg-km/final-project-engineering-66/config"
 	"github.com/rg-km/final-project-engineering-66/helper"
@@ -10,7 +12,6 @@ import (
 	"github.com/rg-km/final-project-engineering-66/models/web"
 	"github.com/rg-km/final-project-engineering-66/repository"
 	"github.com/rg-km/final-project-engineering-66/utils"
-	"time"
 )
 
 type UserService interface {
@@ -56,6 +57,7 @@ func (service *UserServiceImpl) Register(ctx context.Context, request web.Regist
 	}
 
 	user := domain.EntityUser{
+		ID:        utils.Uuid(),
 		FirstName: request.FirstName,
 		LastName:  request.LastName,
 		UserName:  request.UserName,
@@ -76,6 +78,8 @@ func (service *UserServiceImpl) Register(ctx context.Context, request web.Regist
 		UserName:  user.UserName,
 		Email:     user.Email,
 		Phone:     user.Phone,
+		Kota:      user.Kota,
+		Avatar:    user.Avatar,
 		CreatedAt: user.CreatedAt,
 	}
 
@@ -114,7 +118,7 @@ func (service *UserServiceImpl) Login(ctx context.Context, request web.LoginRequ
 
 	response = web.LoginResponse{
 		ID:        user.ID,
-		UserName:  user.UserName,
+		Role:      user.Role,
 		TokenType: "Bearer",
 		Token:     token,
 	}

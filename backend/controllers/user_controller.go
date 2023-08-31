@@ -1,10 +1,11 @@
 package controllers
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/rg-km/final-project-engineering-66/models/web"
 	"github.com/rg-km/final-project-engineering-66/service"
-	"net/http"
 )
 
 type UserController struct {
@@ -55,11 +56,13 @@ func (controller *UserController) Login(ctx *gin.Context) {
 		return
 	}
 
-	if response.UserName == "" {
-		ctx.JSON(400, web.WebResponse{
+	if response.ID == "" {
+		webResponse := web.WebResponse{
 			Code:   400,
-			Status: "User Not Found",
-		})
+			Status: "Bad Request",
+			Data:   "Please check your username or password",
+		}
+		ctx.JSON(http.StatusBadRequest, webResponse)
 		return
 	}
 
