@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+
 	"github.com/rg-km/final-project-engineering-66/models/domain"
 )
 
@@ -27,21 +28,29 @@ func NewUsersRepository(db *sql.DB) UserRepository {
 
 func (repository *UserRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, user domain.EntityUser) (domain.EntityUser, error) {
 	//TODO implement method
-	var email, username string
-	var emailArr, usernameArr []string
+	var username, email, phone string
+	var usernameArr, emailArr, phoneArr []string
 
-	rowsCheck, err := tx.QueryContext(ctx, "SELECT email, username FROM users")
+	rowsCheck, err := tx.QueryContext(ctx, "SELECT username, email, phone FROM users")
 	if err != nil {
 		return domain.EntityUser{}, err
 	}
 
 	for rowsCheck.Next() {
-		err := rowsCheck.Scan(&email, &username)
+		err := rowsCheck.Scan(&username, &email, &phone)
 		if err != nil {
 			return domain.EntityUser{}, err
 		}
-		emailArr = append(emailArr, email)
+
 		usernameArr = append(usernameArr, username)
+		emailArr = append(emailArr, email)
+		phoneArr = append(phoneArr, phone)
+	}
+
+	for _, v := range usernameArr {
+		if v == user.UserName {
+			return domain.EntityUser{}, errors.New("username already exist")
+		}
 	}
 
 	for _, v := range emailArr {
@@ -50,23 +59,25 @@ func (repository *UserRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, user
 		}
 	}
 
-	for _, v := range usernameArr {
-		if v == user.UserName {
-			return domain.EntityUser{}, errors.New("username already exist")
+	for _, v := range phoneArr {
+		if v == user.Phone {
+			return domain.EntityUser{}, errors.New("phone already exist")
 		}
 	}
-	SQL := "INSERT INTO users (firstname, lastname, username, email, phone, password, created_at, update_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)"
+
+	SQL := "INSERT INTO users (id, firstname, lastname, username, email, phone, password, kota, avatar) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)"
 	_, err = tx.ExecContext(
 		ctx,
 		SQL,
+		user.ID,
 		user.FirstName,
 		user.LastName,
 		user.UserName,
 		user.Email,
 		user.Phone,
 		user.Password,
-		user.CreatedAt,
-		user.UpdatedAt,
+		user.Kota,
+		user.Avatar,
 	)
 
 	if err != nil {
@@ -142,8 +153,12 @@ func (repository *UserRepositoryImpl) FindByID(ctx context.Context, tx *sql.Tx, 
 
 func (repository *UserRepositoryImpl) FindByUserName(ctx context.Context, tx *sql.Tx, username string) (domain.EntityUser, error) {
 	//TODO implement me
-	SQL := "SELECT id, firstname, lastname, username, email, phone, password, role, kota, avatar, created_at, update_at FROM users WHERE username = $1"
-	rows, err := tx.QueryContext(ctx, SQL, username)
+	SQL := "SELECT id, firstname, lastname, username, email, role, created_at, updated_at FROM users WHERE username = $1"
+	rows, err := tx.QueryContext(
+		ctx,
+		SQL,
+		username,
+	)
 
 	if err != nil {
 		return domain.EntityUser{}, err
@@ -160,11 +175,7 @@ func (repository *UserRepositoryImpl) FindByUserName(ctx context.Context, tx *sq
 			&user.LastName,
 			&user.UserName,
 			&user.Email,
-			&user.Phone,
-			&user.Password,
 			&user.Role,
-			&user.Kota,
-			&user.Avatar,
 			&user.CreatedAt,
 			&user.UpdatedAt,
 		)
